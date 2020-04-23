@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{Layout}">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+	<div class="panel panel-default">	
+		
+		<div class="panel-heading"><strong>Vous avez bien ajouté cette longueur</strong></div>
+			
+			<div class="panel-body">
+				<label>Nom:</label>
+				<label th:text="${longueur.nom}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>Cotation:</label>
+				<label th:text="${longueur.cotation}"></label>				
+			</div>
+		
+	</div>
+</div>
+
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer> 
+
+</body>
+</html>

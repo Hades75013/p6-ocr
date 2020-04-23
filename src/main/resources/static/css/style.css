@@ -1,0 +1,113 @@
+.red{
+	color : red;
+}
+.spacer{
+	margin-top : 20px;
+}
+
+body
+{
+	font-family: verdana,arial, sans-serif;
+	background-color:rgb(255,220,185);
+	
+}
+
+
+header
+{
+	font-style: italic;
+	background-color:white;
+	text-align: center;
+}
+
+h1
+{
+	color : rgb(0,130,0);
+}
+
+#photos_accueil
+{
+	display : flex;
+}
+
+figure
+{
+	margin : auto;
+}
+
+figcaption
+{
+	font-style: italic;
+	text-align: center;
+}
+
+nav ul
+{
+	list-style-type: none;
+	display : flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+}
+
+nav li 
+{
+  	margin: 10px;
+  	padding: 10px;
+  	border: solid black;
+  	border-radius: 15px;
+  	background-color: green;
+}	
+
+nav a 
+{
+	font-size: 1.3em;
+	color: black;
+	text-decoration: none;
+}
+
+nav a:hover
+{
+	color : white;
+}
+
+
+
+#formulaire
+{
+	display: flex;
+	justify-content: center;
+}
+
+
+
+
+input[type="submit"]
+{
+	display: block;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.element
+{
+	display: flex;
+	margin-bottom: 20px;
+	background-color: pink;
+	
+}
+
+.element p
+{
+	margin-left: 10px;
+	margin-right: 1070px;
+}
+ .boutton
+ {
+ 	margin-top: 13px;
+ }
+footer
+{
+	text-align: center;
+}
+

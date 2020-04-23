@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
+<title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+
+<div class="spacer col-md-6 col-xs-12">
+	<div class="panel panel-default">	
+		<div class="panel-heading"><h4>Ajout d'un spot</h4></div>
+			<div class="panel-body">
+				<form th:action="@{/admin/saveajoutspot}" method="post">
+					<div class="form-group">
+						<label class="control-label">Nom :</label>
+						<input class="form-control" type="text" name="nom" th:value="${spot.nom}"/>
+						<span class="red" th:errors="${spot.nom}"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Département :</label>
+						<input class="form-control" type="text" name="departement" th:value="${spot.departement}"/>
+						<span class="red" th:errors="${spot.departement}"></span>
+					</div>
+					<div>
+					<button type="submit" class="btn btn-primary">Ajouter spot</button>
+					</div>
+				</form>
+			</div>
+	</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer>
+
+</body>
+</html>

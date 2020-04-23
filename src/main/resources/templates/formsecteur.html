@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
+<title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+
+<div id="liste_secteur" class=container>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="secteur:${listeSecteurs}">
+					<td th:text="${secteur.nom}"></td>
+					<td><a th:href="@{/admin/modifiersecteur(id=${secteur.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>								
+					<td><a th:href="@{/admin/ajoutervoie(id=${secteur.id})}">Voies</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<div class="spacer col-md-6 col-xs-12">
+	<div class="panel panel-default">	
+		<div class="panel-heading"><h4>Ajout d'un secteur</h4></div>
+			<div class="panel-body">
+				<form th:action="@{/admin/saveajoutsecteur(id=${idSpot})}" method="post">
+					<div class="form-group">
+						<label class="control-label">Nom :</label>
+						<input class="form-control" type="text" name="nom" th:value="${secteur.nom}"/>
+						<span class="red" th:errors="${secteur.nom}"></span>
+					</div>
+					<div>
+					<button type="submit" class="btn btn-primary">Ajouter secteur</button>
+					</div>
+				</form>
+			</div>
+	</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer>
+
+</body>
+</html>

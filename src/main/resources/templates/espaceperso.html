@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{Layout}">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content"> 
+	
+	<div id="topo" class=container>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th><th>Lieu</th><th>Date de parution</th><th>Description</th><th>Statut</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t:${listeTopos}">
+					<td th:text="${t.nom}"></td>
+					<td th:text="${t.lieu}"></td>
+					<td th:text="${t.dateParution}"></td>
+					<td th:text="${t.description}"></td>
+					<td th:text="${t.statut}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<div class=container>
+		<form th:action="@{/user/ajoutertopo}" method="get">
+			<button class="btn btn-primary">Ajouter topo</button>	
+		</form>	
+	</div>
+</section>
+
+<footer>
+  <p>Copyright Les amis de l'escalade - Tous droits réservés</p>  
+</footer>  
+
+
+</body>
+</html>

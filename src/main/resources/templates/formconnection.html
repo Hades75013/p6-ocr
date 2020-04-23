@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
+<title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+	<div class="spacer col-md-6 col-xs-12">
+		<div class="panel panel-default">	
+			<div class="panel-heading"><h4>Connection à votre compte</h4></div>
+				<div class="panel-body">
+					<form th:action="@{connectionUser}" method="post">
+						<div class="form-group">
+							<label class="control-label">Pseudo :</label>
+							<input class="form-control" type="text" name="username" th:value="${utilisateur.pseudo}"/>
+							<span class="red" th:errors="${utilisateur.pseudo}"></span>					
+						</div>
+						<div class="form-group">
+							<label class="control-label">Mot de passe :</label>
+							<input class="form-control" type="password" name="password" th:value="${utilisateur.motDePasse}"/>
+							<span class="red" th:errors="${utilisateur.motDePasse}"></span>					
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary">Se connecter</button>
+						</div>
+						
+					</form>
+				</div>
+		</div>
+	</div>
+</div>
+
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer>
+
+</body>
+</html>

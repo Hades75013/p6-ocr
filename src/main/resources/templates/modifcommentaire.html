@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
+<title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+
+<div class="spacer col-md-6 col-xs-12">
+	<div class="panel panel-default">	
+		<div class="panel-heading"><h4>Modification d'un commentaire</h4></div>
+			<div class="panel-body">
+				<form th:action="@{/admin/savemodifcommentaire(id=${commentaire.id})}" method="post">
+					<div class="form-group">
+						<label class="control-label">Verbatim :</label>
+						<textarea class="form-control" rows=10 cols=40 name="verbatim" th:value="${commentaire.verbatim}"></textarea>						<span class="red" th:errors="${commentaire.verbatim}"></span>
+					</div>
+					<div>
+					<button type="submit" class="btn btn-primary">Modifier</button>
+					</div>
+				</form>
+			</div>
+	</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer>
+
+
+
+</body>
+</html>
