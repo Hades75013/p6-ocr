@@ -37,11 +37,18 @@ layout:decorate="~{layout}">
 				<tr th:each="spot:${listeSpots}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
-					<td><a th:href="@{/admin/modifierspot(id=${spot.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(id=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
-					<td><a th:href="@{/admin/ajoutercommentaire(id=${spot.id})}">Commentaires</a></td>
-					<td><a th:href="@{/admin/ajoutersecteur(id=${spot.id})}">Secteurs</a></td>				
-					
+					<td><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
+					<td><a th:href="@{/admin/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+					<td><a th:href="@{/admin/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
+					<td><a th:href="@{/admin/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>
+					<td><a th:href="@{/admin/taguerspot(idSpot=${spot.id})}" class="btn btn-primary">Taguer spot</a></td>
+					<td>
+						<div th:switch="${spot.tag}">
+	            		<p th:case="true">         </p>
+		    			<p th:case="false">Officiel</p>
+						</div>
+        			</td>				
 				</tr>
 			</tbody>
 		</table>

@@ -20,7 +20,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Modification d'un commentaire</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/savemodifcommentaire(id=${commentaire.id})}" method="post">
+				<form th:action="@{/admin/savemodifcommentaire(idCommentaire=${commentaire.id})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Verbatim :</label>
 						<textarea class="form-control" rows=10 cols=40 name="verbatim" th:value="${commentaire.verbatim}"></textarea>						<span class="red" th:errors="${commentaire.verbatim}"></span>

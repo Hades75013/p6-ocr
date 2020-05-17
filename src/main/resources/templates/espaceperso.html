@@ -15,7 +15,12 @@ layout:decorate="~{Layout}">
 
 <section layout:fragment="content"> 
 	
-	<div id="topo" class=container>
+	<div id = "titre" class = container>
+	<strong> MES TOPOS </strong>
+	</div>
+	
+	<div id="listeTopo" class=container>
+		
 		<table class="table">
 			<thead>
 				<tr>
@@ -23,23 +28,29 @@ layout:decorate="~{Layout}">
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="t:${listeTopos}">
-					<td th:text="${t.nom}"></td>
-					<td th:text="${t.lieu}"></td>
-					<td th:text="${t.dateParution}"></td>
-					<td th:text="${t.description}"></td>
-					<td th:text="${t.statut}"></td>
+				<tr th:each="topo:${listeTopos}">
+					<td th:text="${topo.nom}"></td>
+					<td th:text="${topo.lieu}"></td>
+					<td th:text="${topo.dateParution}"></td>
+					<td th:text="${topo.description}"></td>
+					<td ><div th:switch="${topo.statut}">
+	            		<p th:case="true"> Disponible </p>
+		    			<p th:case="false">Indisponible</p>
+						</div>
+					</td>
+					<td><a th:href="@{/admin/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimertopo(idTopo=${topo.id})}">Supprimer</a></td>				
+					<td><a th:href="@{/admin/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary">Statut topo</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
-	
-	<div class=container>
-		<form th:action="@{/user/ajoutertopo}" method="get">
-			<button class="btn btn-primary">Ajouter topo</button>	
-		</form>	
+	<div id = "titre" class = container>
+	<strong> MES DEMANDES DE PRET </strong>
 	</div>
+
+
 </section>
 
 <footer>

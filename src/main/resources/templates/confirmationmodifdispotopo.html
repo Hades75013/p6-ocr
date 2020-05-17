@@ -13,22 +13,19 @@ layout:decorate="~{Layout}">
 
 <body>
 
-<div class="container">
+<section layout:fragment="content">
 
-	<div class="panel panel-default">	
-		<div class="panel-heading">Accès refusé</div>
-			<div class="panel-body">
-				<h3 class="red">Vous n'êtes pas autorisé à accéder à cet espace</h3>
-			</div>
-	</div>
+<div class="container">
+		
+		<div><strong>Vous avez bien modifié la disponibilité du topo</strong></div>
+			
 </div>
 
+</section>
 
-
-    <footer>
-       <p>Copyright Les amis de l'escalade - Tous droits réservés</p>  
-    </footer>  
-
+<footer>
+<p layout:fragment="footer"></p>
+</footer> 
 
 </body>
 </html>

@@ -17,13 +17,17 @@ public class Topo implements Serializable{
 	
 	@Id@GeneratedValue
 	private Long id;
+	
 	@Size(min=2)
 	private String nom;
 	
+	@Size(min=2)
 	private String description;
 	
+	@Size(min=2)
 	private String lieu;
 	
+	@Size(min=2)
 	private String dateParution;
 	
 	private boolean statut;

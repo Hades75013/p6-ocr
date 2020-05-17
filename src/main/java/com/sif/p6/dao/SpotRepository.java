@@ -13,5 +13,4 @@ public interface SpotRepository extends JpaRepository<Spot, Long>{
 	@Query("select s from Spot s where s.nom like :x")
 	public Page<Spot> rechercherByNom (@Param("x")String mc, Pageable pageable);
 
-	
 }

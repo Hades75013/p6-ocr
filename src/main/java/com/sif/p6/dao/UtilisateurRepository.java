@@ -6,5 +6,6 @@ import com.sif.p6.entities.Utilisateur;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
 	
+	Utilisateur findByPseudo(String pseudo);
 	
 }

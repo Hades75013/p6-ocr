@@ -39,7 +39,7 @@ layout:decorate="~{layout}">
 					<td th:text="${spot.departement}"></td>				
 					<td><a th:href="@{/user/ajoutercommentaire(id=${spot.id})}">Commentaires</a></td>
 					<td><a th:href="@{/user/ajoutersecteur(id=${spot.id})}">Secteurs</a></td>				
-					
+					<td><a th:href="@{/user/ajoutertopo(id=${spot.id})}">Topos</a></td>
 				</tr>
 			</tbody>
 		</table>

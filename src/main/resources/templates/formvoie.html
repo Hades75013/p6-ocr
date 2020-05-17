@@ -29,9 +29,9 @@ layout:decorate="~{layout}">
 					<td th:text="${voie.hauteur}"></td>
 					<td th:text="${voie.nombrePoints}"></td>
 					<td th:text="${voie.cotation}"></td>
-					<td><a th:href="@{/admin/modifiervoie(id=${voie.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimervoie(idVoie=${voie.id}, idSecteur=${voie.secteur.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>								
-					<td><a th:href="@{/admin/ajouterlongueur(id=${voie.id})}">Longueurs</a></td>
+					<td><a th:href="@{/admin/modifiervoie(idVoie=${voie.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimervoie(idVoie=${voie.id}, idSecteur=${voie.secteur.id})}">Supprimer</a></td>								
+					<td><a th:href="@{/admin/ajouterlongueur(idVoie=${voie.id})}">Longueurs</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -41,7 +41,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'une voie</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutvoie(id=${idSecteur})}" method="post">
+				<form th:action="@{/admin/saveajoutvoie(idSecteur=${idSecteur})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${voie.nom}"/>

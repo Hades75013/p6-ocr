@@ -27,8 +27,8 @@ layout:decorate="~{layout}">
 				<tr th:each="longueur:${listeLongueurs}">
 					<td th:text="${longueur.nom}"></td>
 					<td th:text="${longueur.cotation}"></td>
-					<td><a th:href="@{/admin/modifierlongueur(id=${longueur.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerlongueur(idLongueur=${longueur.id},idVoie=${longueur.voie.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>								
+					<td><a th:href="@{/admin/modifierlongueur(idLongueur=${longueur.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerlongueur(idLongueur=${longueur.id},idVoie=${longueur.voie.id})}">Supprimer</a></td>								
 				</tr>
 			</tbody>
 		</table>
@@ -38,7 +38,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'une longueur</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutlongueur(id=${idVoie})}" method="post">
+				<form th:action="@{/admin/saveajoutlongueur(idVoie=${idVoie})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${longueur.nom}"/>

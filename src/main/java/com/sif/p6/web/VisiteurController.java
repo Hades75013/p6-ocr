@@ -1,37 +1,38 @@
 package com.sif.p6.web;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.sif.p6.dao.RoleRepository;
 import com.sif.p6.dao.SpotRepository;
 import com.sif.p6.dao.UtilisateurRepository;
-import com.sif.p6.entities.Role;
 import com.sif.p6.entities.Spot;
 import com.sif.p6.entities.Utilisateur;
+import com.sif.p6.security.RoleEnum;
 
 @Controller
 public class VisiteurController {
 
 	@Autowired
 	private SpotRepository spotRepository;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
 	
-	@Autowired
-	private RoleRepository roleRepository;
 	
 	@RequestMapping(value="home")
 	public String Home (){
@@ -65,6 +66,7 @@ public class VisiteurController {
 		return "forminscription";
 	}
 	
+	
 	@RequestMapping(value="saveUser", method=RequestMethod.POST)
 	public String sauverUtilisateur(Model model, @Valid Utilisateur utilisateur, BindingResult bindingResult) {
 		model.addAttribute("utilisateur",utilisateur);
@@ -72,43 +74,38 @@ public class VisiteurController {
 			return "forminscription";
 		}
 		
-		Role role = roleRepository.getOne(85l);
-		utilisateur.setRole(role);
-
-		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
-		
+		Collection<RoleEnum> role = new ArrayList<RoleEnum>();
+		role.add(RoleEnum.USER);
+		utilisateur.setRoles(role);
 		utilisateurRepository.save(utilisateur);
 		
 		return "confirmationcreationcompte";
 	}
 	
 	@RequestMapping(value="connection")
-	public String Connection (Model model, Utilisateur utilisateur){
-		model.addAttribute("utilisateur",utilisateur);
-
+	public String Connection (){
+		
 		return "formconnection";
 	}
 	
-	
-	@RequestMapping(value="connectionUser")
-	public String ConnectionUser (Model model, @Valid Utilisateur utilisateur, BindingResult bindingResult){
+	@RequestMapping(value="deconnection")
+	public String Deconnection (){
 		
-		if(bindingResult.hasErrors()) {
-			model.addAttribute("utilisateur",utilisateur);
-
-			return "formconnection";
-		}
-		
-		return "redirect:/user/espaceperso";
-		
+		return "confirmationdeconnection";
 	}
 	
-	@RequestMapping(value="espaceperso")
-	public String EspacePersoRefuse (){
-		return "formconnection";
-	}
-	
-	
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+    public ModelAndView loginGet() {
+		
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            return new ModelAndView("redirect:/espaceperso");
+        }
+        return new ModelAndView("login");
+    }
+	
+	
+	
 }
 

@@ -25,8 +25,8 @@ layout:decorate="~{layout}">
 			<tbody>
 				<tr th:each="commentaire:${listeCommentaires}">
 					<td th:text="${commentaire.verbatim}"></td>
-					<td><a th:href="@{/admin/modifiercommentaire(id=${commentaire.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>		
+					<td><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}">Supprimer</a></td>		
 				</tr>
 			</tbody>
 		</table>
@@ -36,7 +36,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un commentaire</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutcommentaire(id=${idSpot})}" method="post">
+				<form th:action="@{/admin/saveajoutcommentaire(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Commentaire :</label>
 						<textarea class="form-control" rows=10 cols=20 name="verbatim" th:value="${commentaire.verbatim}"></textarea>

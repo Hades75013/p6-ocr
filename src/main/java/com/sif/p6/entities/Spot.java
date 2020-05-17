@@ -21,7 +21,8 @@ public class Spot implements Serializable{
 	@NotNull
 	@Size(min=2)
 	private String departement;
-	
+	@NotNull
+	private boolean tag;
 	
 	@OneToMany
 	private Set<Secteur> secteurs;
@@ -37,12 +38,14 @@ public class Spot implements Serializable{
 		super();
 	}
 	
-	public Spot(Long id, @NotNull @Size(min = 2) String nom, @NotNull @Size(min = 2) String departement, Set<Secteur> secteurs, Set<Topo> topos,
-			Set<Commentaire> commentaires) {
+	
+	public Spot(Long id, @NotNull @Size(min = 2) String nom, @NotNull @Size(min = 2) String departement,
+			@NotNull boolean tag, Set<Secteur> secteurs, Set<Topo> topos, Set<Commentaire> commentaires) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.departement = departement;
+		this.tag = tag;
 		this.secteurs = secteurs;
 		this.topos = topos;
 		this.commentaires = commentaires;
@@ -67,6 +70,14 @@ public class Spot implements Serializable{
 		this.departement = departement;
 	}
 	
+	public boolean isTag() {
+		return tag;
+	}
+
+	public void setTag(boolean tag) {
+		this.tag = tag;
+	}
+
 	public Set<Secteur> getSecteurs() {
 		return secteurs;
 	}

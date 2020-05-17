@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BCryptManagerUtil {
 
-    private final PasswordEncoder passwordEncoder;
+    final PasswordEncoder passwordEncoder;
 
     @Autowired
     public BCryptManagerUtil(PasswordEncoder passwordEncoder) {

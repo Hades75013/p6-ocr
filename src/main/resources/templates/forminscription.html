@@ -26,13 +26,10 @@ layout:decorate="~{layout}">
 							<span class="red" th:errors="${utilisateur.nom}"></span>
 						</div>
 						 <div class="form-group">
-							<label class="control-label">Prénom :</label>
-							
+							<label class="control-label">Prénom :</label>							
 							<input class="form-control" type="text" name="prenom" th:value="${utilisateur.prenom}"/>
 							<span class="red" th:errors="${utilisateur.prenom}"></span>
 						</div>
-						
-						
 						<div class="form-group">
 							<label class="control-label">Pseudo :</label>
 							<input class="form-control" type="text" name="pseudo" th:value="${utilisateur.pseudo}"/>

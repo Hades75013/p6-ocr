@@ -14,13 +14,43 @@ layout:decorate="~{layout}">
 
 <section layout:fragment="content">
 
+<div id = "titre" class = container>
+	<strong> LISTE DES TOPOS DU SPOT </strong>
+</div>
+	
 <div class="container">
 
+	<div id="topo" class=container>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th><th>Lieu</th><th>Date de parution</th><th>Description</th><th>Statut</th><th>Propriétaire</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="topo:${listeTopos}">
+					<td th:text="${topo.nom}"></td>
+					<td th:text="${topo.lieu}"></td>
+					<td th:text="${topo.dateParution}"></td>
+					<td th:text="${topo.description}"></td>
+					<td ><div th:switch="${topo.statut}">
+	            		<p th:case="true"> Disponible </p>
+		    			<p th:case="false">Indisponible</p>
+						</div>
+					</td>
+					<td th:text="${utilisateurPseudo}"></td>
+					<td><a th:href= "@{/admin/demandertopo(idTopo=${topo.id})}"method="get" class="btn btn-primary">Demander topo</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 <div class="spacer col-md-6 col-xs-12">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un topo</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/user/saveajouttopo}" method="post">
+				<form th:action="@{/admin/saveajouttopo(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${topo.nom}"/>
@@ -40,11 +70,6 @@ layout:decorate="~{layout}">
 						<label class="control-label">Description :</label>
 						<textarea class="form-control" rows=10 cols=40 name="description" th:value="${topo.description}"></textarea>
 						<span class="red" th:errors="${topo.description}"></span>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Statut :</label>
-						<input class="form-control" rows=10 cols=40 name="statut" th:value="${topo.statut}"></textarea>
-						<span class="red" th:errors="${topo.statut}"></span>
 					</div>
 					<div>
 					<button type="submit" class="btn btn-primary">Ajouter</button>
