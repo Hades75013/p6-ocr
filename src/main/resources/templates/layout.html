@@ -58,9 +58,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<ul class="nav nav-pills">
 					<li><a th:href="@{spots}">Spots d'escalade</a></li>
                 	<li><a th:href="@{inscription}">S'inscrire</a></li>
-                	<li><a sec:authorize="isAnonymous()" th:href="@{/connection}">Se connecter</a></li>
-                	<li><a sec:authorize="isAuthenticated()" th:href="@{/admin/espaceperso}">Espace Perso</a></li>
-                	<li><a sec:authorize="isAuthenticated()" th:href="@{/deconnection}" method="post">Se deconnecter</a></li>
+                	<li><a sec:authorize="isAnonymous()" th:href="@{connection}">Se connecter</a></li>
+                	<li><a sec:authorize="isAuthenticated()" th:href="@{espaceperso}">Espace Perso</a></li>             	
+                	<li><a sec:authorize="isAuthenticated()" th:href="@{deconnection}">Se deconnecter</a></li>
 				</ul>
 			</nav>
 		</div>

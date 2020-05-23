@@ -90,8 +90,8 @@ public class VisiteurController {
 	
 	@RequestMapping(value="deconnection")
 	public String Deconnection (){
-		
-		return "confirmationdeconnection";
+		 
+		 return "formconnection"; 
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -102,10 +102,14 @@ public class VisiteurController {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             return new ModelAndView("redirect:/espaceperso");
         }
-        return new ModelAndView("login");
+        return new ModelAndView("connection");
     }
 	
-	
+	@RequestMapping(value="espaceperso")
+	public String AccesRefuse (){
+		
+		return "formconnection";
+	}
 	
 }
 

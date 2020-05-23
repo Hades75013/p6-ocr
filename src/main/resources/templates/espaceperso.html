@@ -15,6 +15,36 @@ layout:decorate="~{Layout}">
 
 <section layout:fragment="content"> 
 	
+	<div id = "utilisateur" class = container>
+	<strong th:text="${utilisateur.pseudo}" ></strong>
+	</div>
+	
+	<div id = "titre" class = container>
+	<strong> MES SPOTS </strong>
+	</div>
+	
+	<div id="mes_spots" class=container>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th><th>Département</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="spot:${listeSpots}">
+					<td th:text="${spot.nom}"></td>
+					<td th:text="${spot.departement}"></td>
+					<td><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
+					<td><a th:href="@{/admin/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+					<td><a th:href="@{/admin/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
+					<td><a th:href="@{/admin/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>		
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
 	<div id = "titre" class = container>
 	<strong> MES TOPOS </strong>
 	</div>
@@ -34,8 +64,8 @@ layout:decorate="~{Layout}">
 					<td th:text="${topo.dateParution}"></td>
 					<td th:text="${topo.description}"></td>
 					<td ><div th:switch="${topo.statut}">
-	            		<p th:case="true"> Disponible </p>
-		    			<p th:case="false">Indisponible</p>
+	            		<p th:case="true" class="green"> Disponible </p>
+		    			<p th:case="false" class="red">Indisponible</p>
 						</div>
 					</td>
 					<td><a th:href="@{/admin/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>

@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,6 +25,10 @@ public class Spot implements Serializable{
 	private String departement;
 	@NotNull
 	private boolean tag;
+	
+	@ManyToOne
+	@JoinColumn
+	private Utilisateur utilisateur;
 	
 	@OneToMany
 	private Set<Secteur> secteurs;
@@ -76,6 +82,14 @@ public class Spot implements Serializable{
 
 	public void setTag(boolean tag) {
 		this.tag = tag;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public Set<Secteur> getSecteurs() {

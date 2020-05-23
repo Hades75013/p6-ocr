@@ -57,16 +57,34 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin/espaceperso")
-	public String EspacePerso (Model model, Long idUtilisateur){
+	public String EspacePerso (Model model){
+		
+		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		model.addAttribute("topo", new Topo());
-		model.addAttribute("listeTopos", topoRepository.findAll());
+		model.addAttribute("utilisateur", utilisateur);
+		model.addAttribute("listeTopos", topoRepository.findTopoByUtilisateur(utilisateur.getId()));
+		model.addAttribute("listeSpots", spotRepository.findSpotByUtilisateur(utilisateur.getId()));
 		
 		return "espaceperso";
 	}
 	
 	@RequestMapping(value="/admin/deconnection")
 	public String Deconnection (){
-		return "formconnection";
+		 SecurityContextHolder.clearContext();
+		 
+		 return "redirect:/connection"; 
+	}
+	
+	@RequestMapping(value="/admin/inscription")
+	public String AdminInscription (){
+		 
+		 return "admininscription"; 
+	}
+	@RequestMapping(value="/admin/connection")
+	public String AdminConnection (){
+		 
+		 return "adminconnection"; 
 	}
 	
 	@RequestMapping(value="/admin/spots")
@@ -76,17 +94,59 @@ public class AdminController {
 		 @RequestParam(name="motCle", defaultValue="")String mc) {
 			
 		Page<Spot> pageSpotsByNom = spotRepository.rechercherByNom("%"+mc+"%",PageRequest.of(p, s));
-		int[] pages = new int [pageSpotsByNom.getTotalPages()];
-		
+		int[] pagesSpot = new int [pageSpotsByNom.getTotalPages()];
+
 		
 		model.addAttribute("listeSpots", pageSpotsByNom.getContent());
-		model.addAttribute("pages",pages);
+		model.addAttribute("pages",pagesSpot);
 		model.addAttribute("pageCourante",p);
 		model.addAttribute("size",s);
 		model.addAttribute("motCle",mc);
 
+
 		return "spotsadmin";
 	}
+	
+	@RequestMapping(value="/admin/rechercheParDepartement")
+	public String ResultatRechercheDepartement(Model model, 
+		 @RequestParam(name="page", defaultValue="0")int p, 
+		 @RequestParam(name="size", defaultValue="3")int s,
+		 @RequestParam(name="motCleDep", defaultValue="")String mcDep) {
+			
+		Page<Spot> pageSpotsByDepartement = spotRepository.rechercherByDepartement("%"+mcDep+"%",PageRequest.of(p, s));
+		int[] pagesRechercheDep = new int [pageSpotsByDepartement.getTotalPages()];
+
+		
+		
+		model.addAttribute("listeSpotsDepartement", pageSpotsByDepartement.getContent());
+		model.addAttribute("pagesDep",pagesRechercheDep);
+		model.addAttribute("pageCourante",p);
+		model.addAttribute("size",s);
+		model.addAttribute("motCle",mcDep);
+
+
+		return "resultatrecherchedepartement";
+	}
+	
+	/*
+	@RequestMapping(value="/admin/rechercheParTopoDispo")
+	public String ResultatRechercheTopoDispo(Model model, 
+		 @RequestParam(name="page", defaultValue="0")int p, 
+		 @RequestParam(name="size", defaultValue="3")int s) {
+			
+		Page<Spot> pageSpotsByTopoDispo = spotRepository.rechercherByTopoDispo( true, PageRequest.of(p, s));
+		int[] pagesRechercheTopo = new int [pageSpotsByTopoDispo.getTotalPages()];
+		
+		model.addAttribute("listeSpotsTopo", pageSpotsByTopoDispo.getContent());
+		model.addAttribute("pagesTopo",pagesRechercheTopo);
+		model.addAttribute("pageCourante",p);
+		model.addAttribute("size",s);
+
+
+		return "resultatrecherchetopo";
+	}
+	*/
+	
 	
 	@RequestMapping(value="/admin/ajouterspot", method=RequestMethod.GET)
 	public String ajouterSpot(Model model) {
@@ -97,13 +157,20 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/saveajoutspot", method=RequestMethod.POST)
 	public String sauverAjoutSpot(Model model, @Valid Spot spot, BindingResult bindingResult) {
+				
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("spot",spot);
+
 			return "formspot";
 		}
 		
 		model.addAttribute("spot",spot);
+		
+		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		spot.setUtilisateur(utilisateur);
+		
 		spotRepository.save(spot);
+		
 		return "confirmationajoutspot";
   	}
 	
@@ -117,6 +184,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/savemodifspot", method=RequestMethod.POST)
 	public String sauverModifSpot(Model model, @Valid Spot spot, BindingResult bindingResult) {
+		
 		if(bindingResult.hasErrors()) {
 	   	 	model.addAttribute("spot",spot);
 	   	 	
@@ -124,6 +192,10 @@ public class AdminController {
 		}
 		
 		model.addAttribute("spot",spot);
+
+		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		spot.setUtilisateur(utilisateur);
+
 		spotRepository.save(spot);
 		return "confirmationmodifspot";
 	}
@@ -146,6 +218,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/saveajoutsecteur", method=RequestMethod.POST)
 	public String sauverAjoutSecteur(Model model, Long idSpot, @Valid Secteur secteur, BindingResult bindingResult) {
+		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("listeSecteurs",secteurRepository.findSecteurBySpot(idSpot));
 			model.addAttribute("secteur",secteur);
@@ -312,21 +385,33 @@ public class AdminController {
 		model.addAttribute("commentaire", new Commentaire());
 		model.addAttribute("listeCommentaires", commentaireRepository.findCommentaireBySpot(idSpot));
 		model.addAttribute("idSpot", idSpot);
+
 		return "formcommentaire";
 	}
 
 	@RequestMapping(value="/admin/saveajoutcommentaire", method=RequestMethod.POST)
-	public String sauverAjoutCommentaire(Model model, Long idSpot, @Valid Commentaire commentaire, BindingResult bindingResult, Utilisateur utilisateur) {
+	public String sauverAjoutCommentaire(Model model, Long idSpot, @Valid Commentaire commentaire, BindingResult bindingResult) {
+		
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("listeCommentaires", commentaireRepository.findCommentaireBySpot(idSpot));
 			model.addAttribute("commentaire",commentaire);
+			model.addAttribute("idSpot", idSpot);
+
 			return "formcommentaire";
 		}
 			model.addAttribute("listeCommentaires", commentaireRepository.findCommentaireBySpot(idSpot));
 			model.addAttribute("commentaire",commentaire);
+			model.addAttribute("idSpot", idSpot);
+
+			
 			Spot spot = spotRepository.getOne(idSpot);
 			commentaire.setSpot(spot);
+			
+			Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			commentaire.setUtilisateur(utilisateur);
+			
 			commentaireRepository.save(commentaire);
+			
 			return "confirmationajoutcommentaire";
 	}
 	
@@ -348,6 +433,9 @@ public class AdminController {
 		Commentaire commentaireModifie = commentaireRepository.getOne(idCommentaire);
 		commentaireModifie.setVerbatim(commentaire.getVerbatim());
 				
+		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		commentaire.setUtilisateur(utilisateur);
+		
 		commentaireRepository.save(commentaireModifie);
 
 			
@@ -365,7 +453,6 @@ public class AdminController {
 		model.addAttribute("topo", new Topo());
 		model.addAttribute("listeTopos", topoRepository.findTopoBySpot(idSpot));
 		model.addAttribute("idSpot", idSpot);
-
 		
 		return "formtopo";
 	}
@@ -414,6 +501,9 @@ public class AdminController {
 		topoModifie.setLieu(topo.getLieu());
 		topoModifie.setDateParution(topo.getDateParution());
 		topoModifie.setDescription(topo.getDescription());
+		
+		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		topo.setUtilisateur(utilisateur);
 				
 		topoRepository.save(topoModifie);
 

@@ -59,6 +59,9 @@ public class Utilisateur implements Serializable, UserDetails{
 	private String email;
 	
 	@OneToMany
+	private Set<Spot> spots;
+	
+	@OneToMany
 	private Set<Topo> topos;
 	
 	@OneToMany
@@ -173,6 +176,14 @@ public class Utilisateur implements Serializable, UserDetails{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Set<Spot> getSpots() {
+		return spots;
+	}
+
+	public void setSpots(Set<Spot> spots) {
+		this.spots = spots;
 	}
 
 	public Set<Topo> getTopos() {

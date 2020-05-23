@@ -42,7 +42,7 @@ layout:decorate="~{layout}">
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="spot:${listeSpots}">
+				<tr th:each="spot:${listeSpotsDepartement}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
 					<td><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
@@ -64,8 +64,8 @@ layout:decorate="~{layout}">
      
     <div class="container">
       <ul class="pagination">
-      	 <li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
-      	 <a  th:href="@{/admin/spots(page=${status.index}, size=${size}, motCle=${motCle}, motCleDep=${motCleDep})}" th:text="${status.index}"></a>
+      	 <li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pagesTopo}">
+      	 <a  th:href="@{/admin/rechercheParTopoDispo(page=${status.index}, size=${size})}" th:text="${status.index}"></a>
       	 </li >
       </ul>
     </div> 

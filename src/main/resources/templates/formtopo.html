@@ -35,11 +35,11 @@ layout:decorate="~{layout}">
 					<td th:text="${topo.dateParution}"></td>
 					<td th:text="${topo.description}"></td>
 					<td ><div th:switch="${topo.statut}">
-	            		<p th:case="true"> Disponible </p>
-		    			<p th:case="false">Indisponible</p>
+	            		<p th:case="true" class="green"> Disponible </p>
+		    			<p th:case="false" class="red">Indisponible</p>
 						</div>
 					</td>
-					<td th:text="${utilisateurPseudo}"></td>
+					<td th:text="${topo.utilisateur.pseudo}"></td>
 					<td><a th:href= "@{/admin/demandertopo(idTopo=${topo.id})}"method="get" class="btn btn-primary">Demander topo</a></td>
 				</tr>
 			</tbody>
