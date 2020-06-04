@@ -2,7 +2,7 @@
 <html 
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
 <meta charset="utf-8"/>
 <title>Layout</title>
@@ -56,11 +56,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
    		<div class="navbar navbar-default">
 			<nav>
 				<ul class="nav nav-pills">
-					<li><a th:href="@{spots}">Spots d'escalade</a></li>
+					<li><a th:href="@{listespots}">Spots d'escalade</a></li>
                 	<li><a th:href="@{inscription}">S'inscrire</a></li>
-                	<li><a sec:authorize="isAnonymous()" th:href="@{connection}">Se connecter</a></li>
-                	<li><a sec:authorize="isAuthenticated()" th:href="@{espaceperso}">Espace Perso</a></li>             	
-                	<li><a sec:authorize="isAuthenticated()" th:href="@{deconnection}">Se deconnecter</a></li>
+                	<li><a th:href="@{connection}">Se connecter</a></li>
+                	<li sec:authorize="isAuthenticated()"><a th:href="@{/user/espaceperso}">Espace Perso</a></li>             	
+                	<li sec:authorize="isAuthenticated()"><a th:href="@{/user/deconnection}">Se deconnecter</a></li>
 				</ul>
 			</nav>
 		</div>

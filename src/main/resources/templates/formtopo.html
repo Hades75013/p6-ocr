@@ -34,13 +34,12 @@ layout:decorate="~{layout}">
 					<td th:text="${topo.lieu}"></td>
 					<td th:text="${topo.dateParution}"></td>
 					<td th:text="${topo.description}"></td>
-					<td ><div th:switch="${topo.statut}">
+					<td th:switch="${topo.statut}">
 	            		<p th:case="true" class="green"> Disponible </p>
 		    			<p th:case="false" class="red">Indisponible</p>
-						</div>
 					</td>
 					<td th:text="${topo.utilisateur.pseudo}"></td>
-					<td><a th:href= "@{/admin/demandertopo(idTopo=${topo.id})}"method="get" class="btn btn-primary">Demander topo</a></td>
+					<td><a th:href= "@{/user/demandertopo(idTopo=${topo.id})}"method="get" class="btn btn-primary">Demander topo</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -50,7 +49,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un topo</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajouttopo(idSpot=${idSpot})}" method="post">
+				<form th:action="@{/user/saveajouttopo(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${topo.nom}"/>

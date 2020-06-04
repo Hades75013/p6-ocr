@@ -2,7 +2,9 @@
 <html 
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+layout:decorate="~{layout}"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
@@ -25,8 +27,8 @@ layout:decorate="~{layout}">
 			<tbody>
 				<tr th:each="commentaire:${listeCommentaires}">
 					<td th:text="${commentaire.verbatim}"></td>
-					<td><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}">Supprimer</a></td>		
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}">Modifier</a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}">Supprimer</a></td>		
 				</tr>
 			</tbody>
 		</table>
@@ -36,7 +38,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un commentaire</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutcommentaire(idSpot=${idSpot})}" method="post">
+				<form th:action="@{/user/saveajoutcommentaire(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Commentaire :</label>
 						<textarea class="form-control" rows=10 cols=20 name="verbatim" th:value="${commentaire.verbatim}"></textarea>

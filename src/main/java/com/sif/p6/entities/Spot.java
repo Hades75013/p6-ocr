@@ -30,13 +30,13 @@ public class Spot implements Serializable{
 	@JoinColumn
 	private Utilisateur utilisateur;
 	
-	@OneToMany
+	@OneToMany(mappedBy="spot")
 	private Set<Secteur> secteurs;
 	
-	@OneToMany
+	@OneToMany(mappedBy="spot")
 	private Set<Topo> topos;
 	
-	@OneToMany
+	@OneToMany(mappedBy="spot")
 	private Set<Commentaire> commentaires;
 	
 	

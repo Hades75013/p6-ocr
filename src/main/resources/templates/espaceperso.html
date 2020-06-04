@@ -31,14 +31,12 @@ layout:decorate="~{Layout}">
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="spot:${listeSpots}">
+				<tr th:each="spot:${listeSpotsUtilisateur}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
-					<td><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
-					<td><a th:href="@{/admin/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
-					<td><a th:href="@{/admin/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
-					<td><a th:href="@{/admin/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>		
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size})}">Supprimer</a></td>				
+					<td><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+					<td><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>	
 				</tr>
 			</tbody>
 		</table>
@@ -58,28 +56,65 @@ layout:decorate="~{Layout}">
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="topo:${listeTopos}">
+				<tr th:each="topo:${listeToposUtilisateur}">
 					<td th:text="${topo.nom}"></td>
 					<td th:text="${topo.lieu}"></td>
 					<td th:text="${topo.dateParution}"></td>
 					<td th:text="${topo.description}"></td>
-					<td ><div th:switch="${topo.statut}">
+					<td th:switch="${topo.statut}">
 	            		<p th:case="true" class="green"> Disponible </p>
 		    			<p th:case="false" class="red">Indisponible</p>
-						</div>
 					</td>
-					<td><a th:href="@{/admin/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimertopo(idTopo=${topo.id})}">Supprimer</a></td>				
-					<td><a th:href="@{/admin/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary">Statut topo</a></td>
+					<td><a th:href="@{/user/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimertopo(idTopo=${topo.id})}">Supprimer</a></td>				
+					<td><a th:href="@{/user/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary">Statut topo</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
+	
 	<div id = "titre" class = container>
-	<strong> MES DEMANDES DE PRET </strong>
+	<strong> MES DEMANDES DE PRÊT </strong>
 	</div>
+	
+	<div id="listeDemandesPret" class=container>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom du topo</th><th>Propriétaire</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="reservation:${listeReservationsUtilisateur}">
+					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.topo.utilisateur.pseudo}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 
+<div id = "titre" class = container>
+	<strong> MES DEMANDES DE RESERVATION </strong>
+	</div>
+<div id="listeDemandesReservation" class=container>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom du topo</th><th>Demandeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="reservation:${listeReservationsToposUtilisateur}">
+					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.utilisateur.pseudo}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </section>
 

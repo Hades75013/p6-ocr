@@ -44,11 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity https) throws Exception {
         https.authorizeRequests()
-                .antMatchers("/user**").authenticated()
-                .antMatchers("/admin**").hasAuthority(adminRole)
+                .antMatchers("/user**","/admin**").authenticated()
+                .antMatchers("/admin**").hasRole(adminRole)
                 .anyRequest().permitAll()
             .and()
-                .formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler()).failureUrl("/connection")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/user/espaceperso").failureUrl("/connection")
                 .usernameParameter("username").passwordParameter("password")
             .and()
                 .logout().invalidateHttpSession(true)

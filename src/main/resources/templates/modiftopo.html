@@ -2,12 +2,13 @@
 <html 
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+layout:decorate="~{Layout}">
+
 <head>
-<meta charset="utf-8" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
-<title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
 
 <body>
@@ -15,47 +16,31 @@ layout:decorate="~{layout}">
 <section layout:fragment="content">
 
 <div class="container">
-
-<div class="spacer col-md-6 col-xs-12">
-	<div class="panel panel-default">	
-		<div class="panel-heading"><h4>Modification d'un topo</h4></div>
-			<div class="panel-body">
-				<form th:action="@{/admin/savemodiftopo(idTopo=${topo.id})}" method="post">
-					<div class="form-group">
-						<label class="control-label">Nom :</label>
-						<input class="form-control" type="text" name="nom" th:value="${topo.nom}"/>
-						<span class="red" th:errors="${topo.nom}"></span>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Lieu :</label>
-						<input class="form-control" type="text" name="lieu" th:value="${topo.lieu}"/>
-						<span class="red" th:errors="${topo.lieu}"></span>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Date de parution :</label>
-						<input class="form-control" type="text" name="dateParution" th:value="${topo.dateParution}"/>
-						<span class="red" th:errors="${topo.dateParution}"></span>					
-					</div>
-					<div class="form-group">
-						<label class="control-label">Description :</label>
-						<input class="form-control" type="text" name="description" th:value="${topo.description}"/>
-						<span class="red" th:errors="${topo.description}"></span>					
-					</div>
-					<div>
-					<button type="submit" class="btn btn-primary">Modifier</button>
-					</div>
-				</form>
-			</div>
+	<div class="form-group">
+		
+		<div><strong>Vous avez bien modifié ce topo</strong></div>
+			
+			<label class="control-label">Nom:</label>
+			<label class="control-label" th:text="${topo.nom}"></label>
+				
+			<label class="control-label">Lieu:</label>
+			<label class="control-label" th:text="${topo.lieu}"></label>
+			
+			<label class="control-label">Date de parution:</label>
+			<label class="control-label" th:text="${topo.dateParution}"></label>
+			
+			<label class="control-label">Description:</label>
+			<label class="control-label" th:text="${topo.description}"></label>
+				
 	</div>
 </div>
-</div>
+
+
 </section>
 
 <footer>
 <p layout:fragment="footer"></p>
-</footer>
-
-
+</footer> 
 
 </body>
 </html>

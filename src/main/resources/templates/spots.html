@@ -2,7 +2,8 @@
 <html 
 xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+layout:decorate="~{layout}"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
 <head>
     <meta charset="utf-8" />
@@ -15,18 +16,25 @@ layout:decorate="~{layout}">
 
 <section layout:fragment="content">
 
-
+   
 <div class="container">
-	<form th:action="@{spots}" method="get">
+	<form th:action="@{/listespots}" method="get">
 	<label>Nom : </label>
 	<input type="text" name="motCle" th:value="${motCle}">
 	<button class="btn btn-primary">Rechercher</button>	
+	</form>
+	<form th:action="@{/rechercheParDepartement}" method="get">
+	<label>Departement : </label>
+	<input type="text" name="motCleDep" th:value="${motCleDep}">
+	<button class="btn btn-primary">Rechercher</button>	
+	</form>
+	<form th:action="@{/rechercheParTopoDispo}" method="get">
+	<button class="btn btn-primary">Rechercher Topo dispo</button>	
 	</form>
 </div>
 
 <p></p>
 
-    
 	<div id="sites_d_escalade" class=container>
 		<table class="table">
 			<thead>
@@ -38,6 +46,18 @@ layout:decorate="~{layout}">
 				<tr th:each="spot:${listeSpots}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/taguerspot(idSpot=${spot.id})}" class="btn btn-primary">Taguer spot</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')">
+						<div th:switch="${spot.tag}">
+	            		<p th:case="true">         </p>
+		    			<p th:case="false">Officiel</p>
+						</div>
+        			</td>				
 				</tr>
 			</tbody>
 		</table>
@@ -46,11 +66,17 @@ layout:decorate="~{layout}">
     <div class="container">
       <ul class="pagination">
       	 <li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
-      	 <a  th:href="@{/spots(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
+      	 <a  th:href="@{/listespots(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
       	 </li >
       </ul>
     </div> 
-
+    
+    <div class="container" sec:authorize="isAuthenticated()" >
+    	<form th:action="@{/user/ajouterspot}" method="get">
+		<button class="btn btn-primary">Ajouter spot</button>	
+		</form>	
+	</div>
+	
 </section>
 
 <footer>

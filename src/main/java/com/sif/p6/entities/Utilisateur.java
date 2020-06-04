@@ -58,17 +58,17 @@ public class Utilisateur implements Serializable, UserDetails{
 	@NotNull
 	private String email;
 	
-	@OneToMany
+	@OneToMany(mappedBy="utilisateur")
 	private Set<Spot> spots;
 	
-	@OneToMany
+	@OneToMany(mappedBy="utilisateur")
 	private Set<Topo> topos;
 	
-	@OneToMany
+	@OneToMany(mappedBy="utilisateur")
 	private Set<Commentaire> commentaires;
 	
-	@OneToMany
-	private Set<Emprunt> emprunts;
+	@OneToMany(mappedBy="utilisateur")
+	private Set<Reservation> reservations;
 	
 	@ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
 	@Cascade(value = CascadeType.REMOVE)
@@ -93,38 +93,12 @@ public class Utilisateur implements Serializable, UserDetails{
     @NotNull
 	private boolean active;
 
-    
-	public Utilisateur(Long id, @NotNull @Size(min = 2) String nom, @NotNull @Size(min = 2) String prenom,
-			@NotNull String pseudo, @NotNull @Size(min = 5) String motDePasse, @NotNull String email,
-			Set<Topo> topos, Set<Commentaire> commentaires, Set<Emprunt> emprunts, Collection <RoleEnum> roles) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.pseudo = pseudo;
-		this.motDePasse = motDePasse;
-		this.email = email;
-		this.topos = topos;
-		this.commentaires = commentaires;
-		this.emprunts = emprunts;
-		this.roles = roles;
-		this.accountNonExpired = true;
-        this.accountNonLocked = true;
-        this.credentialsNonExpired = true;
-        this.active = true;
-	}
-
 	public Utilisateur() {
 		this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
         this.active = true;
         this.roles = Collections.singletonList(RoleEnum.USER);
-	}
-	
-	public Utilisateur(Collection<RoleEnum> roles) {
-		super();
-		this.roles = roles;
 	}
     
 	
@@ -202,12 +176,12 @@ public class Utilisateur implements Serializable, UserDetails{
 		this.commentaires = commentaires;
 	}
 
-	public Set<Emprunt> getEmprunts() {
-		return emprunts;
+	public Set<Reservation> getReservations() {
+		return reservations;
 	}
 
-	public void setEmprunts(Set<Emprunt> emprunts) {
-		this.emprunts = emprunts;
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 
 	public Collection<RoleEnum> getRoles() {

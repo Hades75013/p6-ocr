@@ -2,7 +2,9 @@
 <html 
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+layout:decorate="~{layout}"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
@@ -26,9 +28,9 @@ layout:decorate="~{layout}">
 			<tbody>
 				<tr th:each="secteur:${listeSecteurs}">
 					<td th:text="${secteur.nom}"></td>
-					<td><a th:href="@{/admin/modifiersecteur(idSecteur=${secteur.id})}">Modifier</a></td>				
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id})}">Supprimer</a></td>								
-					<td><a th:href="@{/admin/ajoutervoie(idSecteur=${secteur.id})}">Voies</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiersecteur(idSecteur=${secteur.id})}">Modifier</a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id})}">Supprimer</a></td>								
+					<td><a th:href="@{/user/ajoutervoie(idSecteur=${secteur.id})}">Voies</a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -38,7 +40,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un secteur</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutsecteur(idSpot=${idSpot})}" method="post">
+				<form th:action="@{/user/saveajoutsecteur(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${secteur.nom}"/>

@@ -21,7 +21,7 @@ public class Secteur implements Serializable{
 	@Size(min=2)
 	private String nom;
 	
-	@OneToMany
+	@OneToMany(mappedBy="secteur")
 	private Set<Voie> voies;
 	
 	@ManyToOne

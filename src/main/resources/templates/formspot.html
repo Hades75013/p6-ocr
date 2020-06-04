@@ -20,7 +20,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un spot</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/admin/saveajoutspot}" method="post">
+				<form th:action="@{/user/saveajoutspot}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${spot.nom}"/>

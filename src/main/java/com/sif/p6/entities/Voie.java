@@ -26,7 +26,7 @@ public class Voie implements Serializable{
 	
 	private String cotation;
 	
-	@OneToMany
+	@OneToMany(mappedBy="voie")
 	private Set<Longueur> longueurs;
 	
 	@ManyToOne

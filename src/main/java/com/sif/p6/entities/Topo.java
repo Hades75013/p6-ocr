@@ -40,8 +40,8 @@ public class Topo implements Serializable{
 	@JoinColumn
 	private Utilisateur utilisateur;
 	
-	@OneToMany
-	private Set<Emprunt> emprunt;
+	@OneToMany(mappedBy="topo")
+	private Set<Reservation> reservation;
 	
 	public Topo() {
 		super();
@@ -50,7 +50,7 @@ public class Topo implements Serializable{
 	
 
 	public Topo(Long id, @Size(min = 2) String nom, String description, String lieu, String dateParution,
-			boolean statut, Spot spot, Utilisateur utilisateur, Set<Emprunt> emprunt) {
+			boolean statut, Spot spot, Utilisateur utilisateur, Set<Reservation> reservation) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -60,7 +60,7 @@ public class Topo implements Serializable{
 		this.statut = statut;
 		this.spot = spot;
 		this.utilisateur = utilisateur;
-		this.emprunt = emprunt;
+		this.reservation = reservation;
 	}
 
 
@@ -129,12 +129,12 @@ public class Topo implements Serializable{
 		this.utilisateur = utilisateur;
 	}
 
-	public Set<Emprunt> getEmprunt() {
-		return emprunt;
+	public Set<Reservation> getReservation() {
+		return reservation;
 	}
 
-	public void setEmprunt(Set<Emprunt> emprunt) {
-		this.emprunt = emprunt;
+	public void setReservation(Set<Reservation> reservation) {
+		this.reservation = reservation;
 	}
 	
 	
