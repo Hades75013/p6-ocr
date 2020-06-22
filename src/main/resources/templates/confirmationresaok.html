@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{Layout}">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
+</head>
+
+<body>
+
+<section layout:fragment="content">
+
+<div class="container">
+	<div class="panel panel-default">	
+		
+		<div class="panel-heading">
+		<strong>Vous avez accepté la reservation ! Voici les coordonnées du demandeur du prêt afin de pouvoir lui envoyer votre topo : </strong>
+		</div>
+			
+			<div class="panel-body">
+				<label>Pseudo:</label>
+				<label th:text="${reservation.utilisateur.pseudo}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>E-mail:</label>
+				<label th:text="${reservation.utilisateur.email}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>Topo demandé:</label>
+				<label th:text="${reservation.topo.nom}"></label>				
+			</div>
+	</div>
+</div>
+
+</section>
+
+<footer>
+<p layout:fragment="footer"></p>
+</footer> 
+
+</body>
+</html>

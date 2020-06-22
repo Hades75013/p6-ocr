@@ -16,25 +16,21 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-
-	<div class="panel panel-default">	
-		<div class="panel-heading"><strong>Vous avez bien ajouté ce topo</strong></div>
-			<div class="panel-body">
+	<dl>
+		<dt>Vous avez bien ajouté ce topo</dt>
+			
+		<dt>Nom:</dt>
+		<dd th:text="${topo.nom}"></dd>
 				
-				<label>Nom:</label>
-				<label th:text="${topo.nom}"></label>
-				
-				<label>Lieu:</label>
-				<label th:text="${topo.lieu}"></label>
-				
-				<label>Date de parution:</label>
-				<label th:text="${topo.dateParution}"></label>
-				
-				<label>Description:</label>
-				<label th:text="${topo.description}"></label>
-	
-			</div>
-	</div>
+		<dt>Lieu:</dt>
+		<dd th:text="${topo.lieu}"></dd>
+			
+		<dt>Date de parution:</dt>
+		<dd th:text="${topo.dateParution}"></dd>
+			
+		<dt>Description:</dt>
+		<dd th:text="${topo.description}"></dd>
+	</dl>			
 </div>
 
 </section>

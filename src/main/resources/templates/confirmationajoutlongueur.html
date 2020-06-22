@@ -16,20 +16,16 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	<div class="panel panel-default">	
-		
-		<div class="panel-heading"><strong>Vous avez bien ajouté cette longueur</strong></div>
+	<dl>
+		<dt>Vous avez bien ajouté cette longueur</dt>
 			
-			<div class="panel-body">
-				<label>Nom:</label>
-				<label th:text="${longueur.nom}"></label>				
-			</div>
-			<div class="panel-body">
-				<label>Cotation:</label>
-				<label th:text="${longueur.cotation}"></label>				
-			</div>
-		
-	</div>
+		<dt>Nom:</dt>
+		<dd th:text="${longueur.nom}"></dd>
+				
+		<dt>Cotation :</dt>
+		<dd th:text="${longueur.cotation}"></dd>
+			
+	</dl>			
 </div>
 
 </section>

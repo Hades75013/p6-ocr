@@ -8,6 +8,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -17,64 +18,80 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <section layout:fragment="content">
 
    
-<div class="container">
-	<form th:action="@{/listespots}" method="get">
-	<label>Nom : </label>
-	<input type="text" name="motCle" th:value="${motCle}">
-	<button class="btn btn-primary">Rechercher</button>	
-	</form>
-	<form th:action="@{/rechercheParDepartement}" method="get">
-	<label>Departement : </label>
-	<input type="text" name="motCleDep" th:value="${motCleDep}">
-	<button class="btn btn-primary">Rechercher</button>	
-	</form>
-	<form th:action="@{/rechercheParTopoDispo}" method="get">
-	<button class="btn btn-primary">Rechercher Topo dispo</button>	
-	</form>
+<div id="recherche" class="container">
+	
+	<div id="boutonRechercherSpotByNom" class="container">		
+		<form class="form-inline" th:action="@{/listespots}" method="get">
+			<label>Nom : </label>
+			<input type="text" name="motCle" th:value="${motCle}">
+			<button class="btn btn-primary">Rechercher</button>	
+		</form>
+	</div>
+	
+	<div id="boutonRechercherSpotByDepartement" class="container">				
+		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
+			<label>Departement : </label>
+			<input type="text" name="motCleDep" th:value="${motCleDep}">
+			<button class="btn btn-primary">Rechercher</button>	
+		</form>	
+	</div>
+	
 </div>
 
-<p></p>
+<div class="container">
 
-	<div id="sites_d_escalade" class=container>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Nom</th><th>Département</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="spot:${listeSpots}">
-					<td th:text="${spot.nom}"></td>
-					<td th:text="${spot.departement}"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
-					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/taguerspot(idSpot=${spot.id})}" class="btn btn-primary">Taguer spot</a></td>
-					<td sec:authorize="hasAuthority('ADMIN')">
-						<div th:switch="${spot.tag}">
-	            		<p th:case="true">         </p>
-		    			<p th:case="false">Officiel</p>
-						</div>
-        			</td>				
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<div id="sites_d_escalade" class="table-responsive col-lg-12 col-md-4 col-xs-12">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Nom</th><th>Département</th><th>Ajouté par</th>
+				<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-cog"></span></th>
+				<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
+				<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-flag"></span></th>
+				<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-edit"></span></th>
+				<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-globe"></span></th>
+				<th>Officiel</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="spot:${listeSpots}">
+				<td th:text="${spot.nom}"></td>
+				<td th:text="${spot.departement}"></td>
+				<td th:text="${spot.utilisateur.pseudo}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
+				<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
+				<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+				<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
+				<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>
+				<td th:switch="${spot.tagOfficiel}" >
+	            	<p th:case="true"><span class="glyphicon glyphicon-heart"></span></p>
+		    		<p th:case="false" ></p>
+        		</td>
+        		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/taguerspot(idSpot=${spot.id})}">Taguer spot</a></td>								
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
      
-    <div class="container">
-      <ul class="pagination">
-      	 <li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
-      	 <a  th:href="@{/listespots(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
-      	 </li >
-      </ul>
-    </div> 
-    
-    <div class="container" sec:authorize="isAuthenticated()" >
-    	<form th:action="@{/user/ajouterspot}" method="get">
-		<button class="btn btn-primary">Ajouter spot</button>	
-		</form>	
+    <div class="container">   
+        <div id="boutonAjoutSpot" class="container">
+    		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
+			<button class="btn btn-primary">Ajouter spot</button>	
+			</form>	
+		</div>
+		<div id="pagination" class="container">
+      		<ul class="pagination">
+      	 		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
+      	 			<a  th:href="@{/listespots(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
+      	 		</li >
+      		</ul>
+    	</div> 
+        <div id="boutonRechercheTopoDispo" class="container" >		
+			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
+			<button class="btn btn-primary">Rechercher Topo dispo</button>	
+			</form>
+		</div>
 	</div>
 	
 </section>

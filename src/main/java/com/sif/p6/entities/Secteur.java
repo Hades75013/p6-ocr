@@ -3,6 +3,7 @@ package com.sif.p6.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Secteur implements Serializable{
 	@Size(min=2)
 	private String nom;
 	
-	@OneToMany(mappedBy="secteur")
+	@OneToMany(mappedBy="secteur", cascade=CascadeType.ALL)
 	private Set<Voie> voies;
 	
 	@ManyToOne

@@ -1,7 +1,10 @@
 package com.sif.p6.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,16 +25,22 @@ public class Reservation implements Serializable{
 	@ManyToOne
 	@JoinColumn
 	private Topo topo;
+	
+	
+	@Column(name = "statut", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ResaStatutEnum statut;
 
 	public Reservation() {
 		super();
 	}
 	
-	public Reservation(Long id, Utilisateur utilisateur, Topo topo) {
+	public Reservation(Long id, Utilisateur utilisateur, Topo topo, ResaStatutEnum statut) {
 		super();
 		this.id = id;
 		this.utilisateur = utilisateur;
 		this.topo = topo;
+		this.statut = statut;
 	}
 
 	
@@ -57,6 +66,19 @@ public class Reservation implements Serializable{
 
 	public void setTopo(Topo topo) {
 		this.topo = topo;
+	}
+
+	public ResaStatutEnum getStatut() {
+		return statut;
+	}
+
+	public void setStatut(ResaStatutEnum statut) {
+		this.statut = statut;
+	}
+	
+	public boolean isEnCours() {
+		return ResaStatutEnum.EN_COURS.equals(this.statut);
+		
 	}
 	
 	

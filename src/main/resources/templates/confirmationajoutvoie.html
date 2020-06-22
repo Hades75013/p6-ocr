@@ -16,27 +16,21 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	<div class="panel panel-default">	
-		
-		<div class="panel-heading"><strong>Vous avez bien ajouté cette voie</strong></div>
+	<dl>
+		<dt>Vous avez bien ajouté cette voie</dt>
 			
-			<div class="panel-body">
-				<label>Nom:</label>
-				<label th:text="${voie.nom}"></label>				
-			</div>
-			<div class="panel-body">
-				<label>Hauteur:</label>
-				<label th:text="${voie.hauteur}"></label>				
-			</div>
-			<div class="panel-body">
-				<label>Nombre de points:</label>
-				<label th:text="${voie.nombrePoints}"></label>				
-			</div>
-			<div class="panel-body">
-				<label>Cotation:</label>
-				<label th:text="${voie.cotation}"></label>				
-			</div>
-	</div>
+		<dt>Nom:</dt>
+		<dd th:text="${voie.nom}"></dd>
+				
+		<dt>Hauteur:</dt>
+		<dd th:text="${voie.hauteur}"></dd>
+			
+		<dt>Nombre de points:</dt>
+		<dd th:text="${voie.nombrePoints}"></dd>
+			
+		<dt>Cotation:</dt>
+		<dd th:text="${voie.cotation}"></dd>
+	</dl>			
 </div>
 
 </section>

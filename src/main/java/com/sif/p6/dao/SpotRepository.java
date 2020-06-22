@@ -21,7 +21,5 @@ public interface SpotRepository extends JpaRepository<Spot, Long>{
 	@Query("select s from Spot s where s.utilisateur.id = :id")
 	public List<Spot> findSpotByUtilisateur(Long id);
 
-	/*@Query("select s from Spot s join fetch s.topos t where t.statut = :statut")
-	public Page<Spot> rechercherByTopoDispo (Boolean statut,Pageable pageable);
-	*/
+	
 }

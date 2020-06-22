@@ -7,6 +7,7 @@ layout:decorate="~{layout}">
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -16,53 +17,70 @@ layout:decorate="~{layout}">
 <section layout:fragment="content">
 
 
-<div class="container">
-	<form th:action="@{/listespots}" method="get">
-	<label>Nom : </label>
-	<input type="text" name="motCle" th:value="${motCle}">
-	<button class="btn btn-primary">Rechercher</button>	
-	</form>
-	<form th:action="@{/rechercheParDepartement}" method="get">
-	<label>Departement : </label>
-	<input type="text" name="motCleDep" th:value="${motCleDep}">
-	<button class="btn btn-primary">Rechercher</button>	
-	</form>
-	<form th:action="@{/rechercheParTopoDispo}" method="get">
-	<button class="btn btn-primary">Rechercher Topo dispo</button>	
-	</form>
+<div id="recherche" class="container">
+	
+	<div id="boutonRechercherSpotByNom" class="container">		
+		<form class="form-inline" th:action="@{/listespots}" method="get">
+			<label>Nom : </label>
+			<input type="text" name="motCle" th:value="${motCle}">
+			<button class="btn btn-primary">Rechercher</button>	
+		</form>
+	</div>
+	
+	<div id="boutonRechercherSpotByDepartement" class="container">				
+		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
+			<label>Departement : </label>
+			<input type="text" name="motCleDep" th:value="${motCleDep}">
+			<button class="btn btn-primary">Rechercher</button>	
+		</form>	
+	</div>
+	
 </div>
 
-<p></p>
+    <div class="container">   
 
-	<div id="sites_d_escalade" class=container>
-		<table class="table">
+	<div id="sites_d_escalade" class="table-responsive col-lg-12 col-md-4 col-xs-12">
+		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Nom du topo</th><th>Nom du spot</th><th>Departement</th>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Propriétaire</th><th>Statut</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="topo:${listeSpotsTopo}">
 					<td th:text="${topo.nom}"></td>				
 					<td th:text="${topo.spot.nom}"></td>
-					<td th:text="${topo.spot.departement}"></td>				
+					<td th:text="${topo.utilisateur.pseudo}"></td>				
+					<td th:switch="${topo.statut}">
+	            		<p th:case="true" class="green"> Disponible </p>
+		    			<p th:case="false" class="red">Indisponible</p>
+					</td>	
+					<td sec:authorize="isAuthenticated()"><a th:if="${topo.statut}" th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get">Demander topo</a></td>								
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	</div>
+
      
-    <div class="container">
-      <ul class="pagination">
-      	 <li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pagesTopo}">
-      	 <a  th:href="@{/rechercheParTopoDispo(page=${status.index}, size=${size})}" th:text="${status.index}"></a>
-      	 </li >
-      </ul>
-    </div> 
-    
-    <div class="container">
-    	<form th:action="@{/admin/ajouterspot}" method="get">
-		<button class="btn btn-primary">Ajouter spot</button>	
-		</form>	
+    <div class="container">   
+        <div id="boutonAjoutSpot" class="container">
+    		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
+			<button class="btn btn-primary">Ajouter spot</button>	
+			</form>	
+		</div>
+		<div class="container">
+      		<ul class="pagination">
+      	 		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
+      	 			<a  th:href="@{/listespots(page=${status.index}, size=${size})}" th:text="${status.index}"></a>
+      	 		</li >
+      		</ul>
+    	</div> 
+        <div id="boutonRechercheTopoDispo" class="container" >		
+			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
+			<button class="btn btn-primary">Rechercher Topo dispo</button>	
+			</form>
+		</div>
 	</div>
 	
 </section>

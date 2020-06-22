@@ -144,13 +144,13 @@ public class AdminController {
 
 	@RequestMapping(value="/admin/supprimerspot", method=RequestMethod.GET)
 
-	public String supprimerSpot (Long idSpot, int page, int size, String motCle) {
+	public String supprimerSpot (Long idSpot, int page, int size) {
 
 		spotRepository.deleteById(idSpot);
 
 	
 
-		return "redirect:/admin/spots?page="+page+"&size="+size+"&motCle="+motCle;
+		return "redirect:/user/listespots?page="+page+"&size="+size;
 
 	}
 
@@ -213,7 +213,7 @@ public class AdminController {
 
 	
 
-		return "redirect:/admin/ajoutersecteur?idSpot="+idSpot;
+		return "redirect:/user/ajoutersecteur?idSpot="+idSpot;
 
 	}
 
@@ -279,7 +279,7 @@ public class AdminController {
 
 		voieRepository.deleteById(idVoie);
 
-		return "redirect:/admin/ajoutervoie?idSecteur="+idSecteur;
+		return "redirect:/user/ajoutervoie?idSecteur="+idSecteur;
 
 	}
 
@@ -343,7 +343,7 @@ public class AdminController {
 
 		longueurRepository.deleteById(idLongueur);
 
-		return "redirect:/admin/ajouterlongueur?idVoie="+idVoie;
+		return "redirect:/user/ajouterlongueur?idVoie="+idVoie;
 
 	}
 
@@ -408,7 +408,7 @@ public class AdminController {
 
 		commentaireRepository.deleteById(idCommentaire);
 
-		return "redirect:/admin/ajoutercommentaire?idSpot="+idSpot;
+		return "redirect:/user/ajoutercommentaire?idSpot="+idSpot;
 
 	}
 
@@ -498,7 +498,7 @@ public class AdminController {
 
 		Spot spot = optionalspot.get();
 
-		spot.setTag(!spot.isTag());
+		spot.setTagOfficiel(!spot.isTagOfficiel());
 
 		
 

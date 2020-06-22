@@ -13,18 +13,17 @@ layout:decorate="~{Layout}">
 
 <body>
 
-<section layout:fragment="content"> 
+<section layout:fragment="content">
 	
-	<div id = "utilisateur" class = container>
-	<strong th:text="${utilisateur.pseudo}" ></strong>
-	</div>
 	
-	<div id = "titre" class = container>
-	<strong> MES SPOTS </strong>
+	
+	
+	<div id="titre_tableau" class=container>
+		<h5><strong> MES SPOTS </strong></h5>
 	</div>
 	
 	<div id="mes_spots" class=container>
-		<table class="table">
+		<table class="table table-bordered table-striped">		
 			<thead>
 				<tr>
 					<th>Nom</th><th>Département</th>
@@ -43,21 +42,23 @@ layout:decorate="~{Layout}">
 	</div>
 	
 	
-	<div id = "titre" class = container>
-	<strong> MES TOPOS </strong>
+	
+	<div id="titre_tableau" class=container>
+		<h5><strong> MES TOPOS </strong></h5>
 	</div>
 	
-	<div id="listeTopo" class=container>
+	<div id="mes_topos" class=container>			
+		<table class="table table-bordered table-striped">
 		
-		<table class="table">
 			<thead>
 				<tr>
-					<th>Nom</th><th>Lieu</th><th>Date de parution</th><th>Description</th><th>Statut</th>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Lieu</th><th>Date de parution</th><th>Description</th><th>Statut</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="topo:${listeToposUtilisateur}">
 					<td th:text="${topo.nom}"></td>
+					<td th:text="${topo.spot.nom}"></td>
 					<td th:text="${topo.lieu}"></td>
 					<td th:text="${topo.dateParution}"></td>
 					<td th:text="${topo.description}"></td>
@@ -74,43 +75,52 @@ layout:decorate="~{Layout}">
 	</div>
 	
 	
-	<div id = "titre" class = container>
-	<strong> MES DEMANDES DE PRÊT </strong>
+	
+	<div id="titre_tableau" class=container>
+		<h5><strong> TOPOS DEMANDES </strong></h5>
 	</div>
 	
-	<div id="listeDemandesPret" class=container>
+	<div id="listeDemandesPret" class=container>		
+		<table class="table table-bordered table-striped table-condensed">
 		
-		<table class="table">
 			<thead>
 				<tr>
-					<th>Nom du topo</th><th>Propriétaire</th>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Propriétaire</th><th>Statut</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="reservation:${listeReservationsUtilisateur}">
 					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.topo.spot.nom}"></td>										
 					<td th:text="${reservation.topo.utilisateur.pseudo}"></td>
+					<td th:text="${reservation.statut}"></td>					
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
 
-<div id = "titre" class = container>
-	<strong> MES DEMANDES DE RESERVATION </strong>
-	</div>
-<div id="listeDemandesReservation" class=container>
+
+	<div id="titre_tableau" class=container>
+		<h5><strong> MES DEMANDES DE RESERVATION </strong></h5>
+	</div>	
+	
+	<div id="listeDemandesReservation" class=container>		
+		<table class="table table-bordered table-striped">
 		
-		<table class="table">
 			<thead>
 				<tr>
-					<th>Nom du topo</th><th>Demandeur</th>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Demandeur</th><th>Statut</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="reservation:${listeReservationsToposUtilisateur}">
 					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.topo.spot.nom}"></td>					
 					<td th:text="${reservation.utilisateur.pseudo}"></td>
+					<td th:text="${reservation.statut}"></td>					
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/resaOk(idReservation=${reservation.id})}"  class="btn btn-primary">Accepter</a></td>	
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/refusResa(idReservation=${reservation.id})}"  class="btn btn-primary">Refuser</a></td>				
 				</tr>
 			</tbody>
 		</table>
@@ -118,7 +128,7 @@ layout:decorate="~{Layout}">
 
 </section>
 
-<footer>
+<footer >
   <p>Copyright Les amis de l'escalade - Tous droits réservés</p>  
 </footer>  
 

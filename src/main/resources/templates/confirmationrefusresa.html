@@ -7,7 +7,6 @@ layout:decorate="~{Layout}">
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -17,9 +16,25 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	
-		<div><strong>Votre demande a bien été envoyé au propriétaire du topo</strong></div>
+	<div class="panel panel-default">	
+		
+		<div class="panel-heading">
+		<strong>Vous avez bien refusé la reservation du topo ! </strong>
+		</div>
 			
+			<div class="panel-body">
+				<label>Nom du topo:</label>
+				<label th:text="${reservation.topo.nom}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>Nom du site:</label>
+				<label th:text="${reservation.topo.spot.nom}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>Demandeur:</label>
+				<label th:text="${reservation.utilisateur.pseudo}"></label>				
+			</div>
+	</div>
 </div>
 
 </section>

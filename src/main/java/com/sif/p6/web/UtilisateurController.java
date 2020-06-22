@@ -43,6 +43,7 @@ import com.sif.p6.dao.VoieRepository;
 import com.sif.p6.entities.Commentaire;
 
 import com.sif.p6.entities.Longueur;
+import com.sif.p6.entities.ResaStatutEnum;
 import com.sif.p6.entities.Reservation;
 import com.sif.p6.entities.Secteur;
 
@@ -110,11 +111,8 @@ public class UtilisateurController {
 	@RequestMapping(value="user/espaceperso")
 
 	public String EspacePerso (Model model, Long id){
-		
-      
+	         
 		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		
 
 		model.addAttribute("utilisateur", utilisateur);
 
@@ -125,6 +123,7 @@ public class UtilisateurController {
 		model.addAttribute("listeReservationsUtilisateur", reservationRepository.findResaByUtilisateur(utilisateur.getId()));
 
 		model.addAttribute("listeReservationsToposUtilisateur", reservationRepository.findResaByTopoByUtilisateur(utilisateur.getId()));
+
 
 		
 		return "espaceperso";
@@ -793,23 +792,63 @@ public class UtilisateurController {
 
 	@RequestMapping(value="/user/demandertopo", method=RequestMethod.GET)
 
-	public String demanderTopo(Model model, Long idTopo, Topo topo) { 
-		model.addAttribute("topo", topo);
-		model.addAttribute("idTopo", idTopo);
+	public String demanderTopo(Model model, Long idTopo) { 
 		
 		Reservation reservation = new Reservation();
+		reservation.setStatut(ResaStatutEnum.EN_COURS);
 		
 		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		reservation.setUtilisateur(utilisateur);
 		
-		topo = topoRepository.getOne(idTopo);
+		Topo topo = topoRepository.getOne(idTopo);
 		reservation.setTopo(topo);
 
 		reservationRepository.save(reservation);
 		
+		model.addAttribute("topo", topo);
+		model.addAttribute("idTopo", idTopo);
+		
+		
 		return "demandetopo";
 	}
 
+	
+	
+	@RequestMapping(value="/user/resaOk", method=RequestMethod.GET)
+
+	public String AccepterReservation(Model model, Long idReservation) { 
+				
+		Reservation reservation = reservationRepository.getOne(idReservation);
+		reservation.getTopo().setStatut(false);
+		topoRepository.save(reservation.getTopo());
+		
+		
+		reservation.setStatut(ResaStatutEnum.ACCEPTEE);
+		
+		reservationRepository.save(reservation);
+
+		model.addAttribute("reservation", reservation);
+		
+		
+		return "confirmationresaok";
+	}
+	
+	@RequestMapping(value="/user/refusResa", method=RequestMethod.GET)
+
+	public String RefuserReservation(Model model, Long idReservation) { 
+		
+		Reservation reservation = reservationRepository.getOne(idReservation);
+		
+		
+		reservation.setStatut(ResaStatutEnum.REFUSEE);
+		
+		reservationRepository.save(reservation);
+
+		model.addAttribute("reservation", reservation);
+		
+		
+		return "confirmationrefusresa";
+	}
 	
 
 }

@@ -8,6 +8,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
 <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -15,26 +16,33 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <body>
 
 <section layout:fragment="content">
+
 <div class="container">
 
-<div id="commentaires" class=container>
-		<table class="table">
+<div id="liste_commentaires" class="table-responsive col-lg-10 col-md-6 col-xs-12">
+		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Liste des commentaires</th>
+					<th>Liste des commentaires</th><th>Ajouté par</th>
+					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-edit"></span></th>
+					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="commentaire:${listeCommentaires}">
 					<td th:text="${commentaire.verbatim}"></td>
+					<td th:text="${commentaire.utilisateur.pseudo}"></td>
 					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}">Modifier</a></td>				
 					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}">Supprimer</a></td>		
 				</tr>
 			</tbody>
 		</table>
 	</div>
+</div>
 
-<div class="spacer col-md-6 col-xs-12">
+<div class="container">
+
+<div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un commentaire</h4></div>
 			<div class="panel-body">

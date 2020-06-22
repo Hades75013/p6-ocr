@@ -15,18 +15,16 @@ layout:decorate="~{Layout}">
 
 <section layout:fragment="content">
 
-<div class="container">
-	<div class="form-group">
-		
-		<div><strong>Vous avez bien modifié ce spot</strong></div>
-			
-			<label class="control-label">Nom:</label>
-			<label class="control-label" th:text="${spot.nom}"></label>
+<div class="container">		
+			<dl>
+				<dt>Vous avez bien modifié ce spot </dt>
 				
-			<label class="control-label">Département:</label>
-			<label class="control-label" th:text="${spot.departement}"></label>
+				<dt>Nom:</dt>
+				<dd th:text="${spot.nom}"></dd>
 				
-	</div>
+				<dt>Département:</dt>
+				<dd th:text="${spot.departement}"></dd>
+			</dl>	
 </div>
 
 

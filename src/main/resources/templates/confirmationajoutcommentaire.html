@@ -16,16 +16,13 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-
-	<div class="panel panel-default">	
-		<div class="panel-heading"><strong>Vous avez bien ajouté ce commentaire</strong></div>
-			<div class="panel-body">
+	<dl>
+		<dt>Vous avez bien ajouté ce commentaire</dt>
 			
-				<label>Verbatim:</label>
-				<label th:text="${commentaire.verbatim}"></label>
-			
-			</div>
-	</div>
+		<dt>Verbatim:</dt>
+		<dd th:text="${commentaire.verbatim}"></dd>
+				
+	</dl>			
 </div>
 
 </section>

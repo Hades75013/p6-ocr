@@ -3,80 +3,77 @@
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+
 <head>
 <meta charset="utf-8"/>
 <title>Layout</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
-<body>
-  
+
+<body >
     <header>
         <div id="titre_principal" class="container">
-        <h1>Les amis de l'escalade</h1>
+        	<h1>Les amis de l'escalade</h1>
+        </div>
+        <div id="sous_titre" class="container">        
             <h2>S’adonner à l’escalade et profiter de la beauté des sites naturels</h2>
         </div>
     </header>
-
 	
-	
-    	<div class="container">
+    <div class="container">
         <article>
-    	<p>Bonjour et bienvenue sur le site de l'association <strong>Les amis de l'escalade.</strong></p>
-    	<p>L’escalade est un sport qui ne cesse d’attirer de plus en plus d’adeptes avides de nouvelles sensations. Pour pouvoir le pratiquer convenablement et en toute sécurité, il vaut mieux connaitre les sites de grimpe.</p>
-    	<p>Notre association a pour but de mettre en relation nos membres afin qu'ils puissent échanger et partager entre eux leurs expériences concernant les nombreux sites d'escalade.</p>
-    	<p>Alors impatient de rejoindre notre communauté de grimpeurs ?</p>
-    
-           <div id="photos_accueil" class="container">
-            <figure>
-            <img src="/image_site_de_grimpe.jpg" alt="Photo de site avec membres de l'association" title = "Nos membres en action !" />
-            <figcaption>Ablon-Haute Savoie</figcaption>
+    		<p>Bonjour et bienvenue sur le site de l'association <strong>Les amis de l'escalade.</strong></p>
+    		<p>L’escalade est un sport qui ne cesse d’attirer de plus en plus d’adeptes avides de nouvelles sensations. Pour pouvoir le pratiquer convenablement et en toute sécurité, il vaut mieux connaitre les sites de grimpe.</p>
+    		<p>Notre association a pour but de mettre en relation nos membres afin qu'ils puissent échanger et partager entre eux leurs expériences concernant les nombreux sites d'escalade.</p>
+    		<p>Alors impatient de rejoindre notre communauté de grimpeurs ?</p>
+    	
+           
+        <div id="photos_accueil" class="img-responsive">
+        	<figure>
+            	<img src="/67.7.jpg" class="img-thumbnail" alt="Photo Ablon" title = "Nos membres en action !" />
+            	<figcaption>Ablon-Haute Savoie</figcaption>
             </figure>
-
             <figure>
-            <img src="/image_site_de_grimpe3.jpg" alt="Photo indoor avec membres de l'association" title = "Notre passion en tout temps !" />
-            <figcaption>Session en indoor-Paris</figcaption>
+            	<img src="/66.8.jpg" class="img-thumbnail" alt="Photo indoor" title = "Notre passion en tout temps !" />
+            	<figcaption>Session en indoor-Paris</figcaption>
             </figure>
-
             <figure>
-            <img src="/image_site_de_grimpe4.jpg" alt="Photo de site avec membres de l'association4" title = "Des paysages sublimes !" />
-            <figcaption>Gorges du Tarn-Lozère</figcaption>
+            	<img src="/74.3.jpg"class="img-thumbnail" alt="Photo Gorge du Tarn" title = "Des paysages sublimes !" />
+            	<figcaption>Gorges du Tarn-Lozère</figcaption>
             </figure>
-
             <figure>
-            <img src="/image_site_de_grimpe5.jpg" alt="Photo de site avec membres de l'association5" title = "Apprentissage a tout age !" />
-            <figcaption>Eyroles-Drôme</figcaption>
+            	<img src="/68.8.jpg" class="img-thumbnail" alt="Photo Eyrole" title = "Apprentissage a tout age !" />
+            	<figcaption>Eyroles-Drôme</figcaption>
             </figure>
         </div>
-
         </article>
     </div>
     
     <div class="container">
-   		<div class="navbar navbar-default">
-			<nav>
-				<ul class="nav nav-pills">
-					<li><a th:href="@{listespots}">Spots d'escalade</a></li>
-                	<li><a th:href="@{inscription}">S'inscrire</a></li>
-                	<li><a th:href="@{connection}">Se connecter</a></li>
-                	<li sec:authorize="isAuthenticated()"><a th:href="@{/user/espaceperso}">Espace Perso</a></li>             	
-                	<li sec:authorize="isAuthenticated()"><a th:href="@{/user/deconnection}">Se deconnecter</a></li>
-				</ul>
-			</nav>
-		</div>
+		<nav>
+			<ul class="nav nav-pills">
+				<li><a th:href="@{listespots}"><strong>SPOTS D'ESCALADE</strong></a></li>
+                <li><a th:href="@{inscription}"><strong>S'INSCRIRE</strong></a></li>
+                <li><a th:href="@{connection}"><strong>SE CONNECTER</strong></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user/espaceperso}"><strong>ESPACE PERSO</strong></a></li>             	
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user/deconnection}"><strong>SE DECONNECTER</strong></a></li>
+			</ul>
+		</nav>
+	</div>
+  
+  	<div id="welcome" class="container " sec:authorize="isAuthenticated()">
+    	<h3><strong>Bienvenue <span sec:authentication="name"></span> !</strong></h3>
 	</div>
   
   
-  
-  <section layout:fragment="content"></section> 
+<section layout:fragment="content"></section> 
    
- 	
-
-	<footer class="navbar-fixed-bottom">
-	
+   
+<footer >
 	Copyright-Les amis de l'escalade-2020
-	
-	</footer>
+</footer>
 
 </body>
 </html>

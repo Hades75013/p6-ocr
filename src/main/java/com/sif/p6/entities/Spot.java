@@ -3,6 +3,7 @@ package com.sif.p6.entities;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,19 +25,19 @@ public class Spot implements Serializable{
 	@Size(min=2)
 	private String departement;
 	@NotNull
-	private boolean tag;
+	private boolean tagOfficiel;
 	
 	@ManyToOne
 	@JoinColumn
 	private Utilisateur utilisateur;
 	
-	@OneToMany(mappedBy="spot")
+	@OneToMany(mappedBy="spot", cascade=CascadeType.ALL)
 	private Set<Secteur> secteurs;
 	
-	@OneToMany(mappedBy="spot")
+	@OneToMany(mappedBy="spot", cascade=CascadeType.ALL)
 	private Set<Topo> topos;
 	
-	@OneToMany(mappedBy="spot")
+	@OneToMany(mappedBy="spot", cascade=CascadeType.ALL)
 	private Set<Commentaire> commentaires;
 	
 	
@@ -46,12 +47,12 @@ public class Spot implements Serializable{
 	
 	
 	public Spot(Long id, @NotNull @Size(min = 2) String nom, @NotNull @Size(min = 2) String departement,
-			@NotNull boolean tag, Set<Secteur> secteurs, Set<Topo> topos, Set<Commentaire> commentaires) {
+			@NotNull boolean tagOfficiel, Set<Secteur> secteurs, Set<Topo> topos, Set<Commentaire> commentaires) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.departement = departement;
-		this.tag = tag;
+		this.tagOfficiel = tagOfficiel;
 		this.secteurs = secteurs;
 		this.topos = topos;
 		this.commentaires = commentaires;
@@ -76,12 +77,12 @@ public class Spot implements Serializable{
 		this.departement = departement;
 	}
 	
-	public boolean isTag() {
-		return tag;
+	public boolean isTagOfficiel() {
+		return tagOfficiel;
 	}
 
-	public void setTag(boolean tag) {
-		this.tag = tag;
+	public void setTagOfficiel(boolean tagOfficiel) {
+		this.tagOfficiel = tagOfficiel;
 	}
 	
 	public Utilisateur getUtilisateur() {

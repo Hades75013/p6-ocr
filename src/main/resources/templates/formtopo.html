@@ -6,6 +6,7 @@ layout:decorate="~{layout}">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" /> 
 <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -14,15 +15,11 @@ layout:decorate="~{layout}">
 
 <section layout:fragment="content">
 
-<div id = "titre" class = container>
-	<strong> LISTE DES TOPOS DU SPOT </strong>
-</div>
-	
-<div class="container">
+<div class="container">	
 
-	<div id="topo" class=container>
+	<div id="topo" class="table-responsive col-lg-12 col-md-6 col-xs-12">
 		
-		<table class="table">
+		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th>Nom</th><th>Lieu</th><th>Date de parution</th><th>Description</th><th>Statut</th><th>Propriétaire</th>
@@ -39,13 +36,16 @@ layout:decorate="~{layout}">
 		    			<p th:case="false" class="red">Indisponible</p>
 					</td>
 					<td th:text="${topo.utilisateur.pseudo}"></td>
-					<td><a th:href= "@{/user/demandertopo(idTopo=${topo.id})}"method="get" class="btn btn-primary">Demander topo</a></td>
+					<td ><a th:if="${topo.statut}" th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get" class="btn btn-primary" >Demander topo</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+</div>
+
+<div class="container">
 	
-<div class="spacer col-md-6 col-xs-12">
+<div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Ajout d'un topo</h4></div>
 			<div class="panel-body">
@@ -76,7 +76,6 @@ layout:decorate="~{layout}">
 				</form>
 			</div>
 	</div>
-</div>
 </div>
 </section>
 

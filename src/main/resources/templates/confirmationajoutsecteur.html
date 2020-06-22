@@ -16,15 +16,13 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	<div class="panel panel-default">	
-		
-		<div class="panel-heading"><strong>Vous avez bien ajouté ce secteur</strong></div>
+	<dl>
+		<dt>Vous avez bien ajouté ce secteur</dt>
 			
-			<div class="panel-body">
-				<label>Nom:</label>
-				<label th:text="${secteur.nom}"></label>				
-			</div>
-	</div>
+		<dt>Nom:</dt>
+		<dd th:text="${secteur.nom}"></dd>
+				
+	</dl>			
 </div>
 
 </section>

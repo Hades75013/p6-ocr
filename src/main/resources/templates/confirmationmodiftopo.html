@@ -16,13 +16,21 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	<div class="form-group">
-		
-		<div><strong>Vous avez bien modifié ce topo</strong></div>
+	<dl>
+		<dt>Vous avez bien modifié ce topo</dt>
 			
-					
+		<dt>Nom:</dt>
+		<dd th:text="${topo.nom}"></dd>
+				
+		<dt>Lieu:</dt>
+		<dd th:text="${topo.lieu}"></dd>
 			
-	</div>
+		<dt>Date de parution:</dt>
+		<dd th:text="${topo.dateParution}"></dd>
+			
+		<dt>Description:</dt>
+		<dd th:text="${topo.description}"></dd>
+	</dl>			
 </div>
 
 

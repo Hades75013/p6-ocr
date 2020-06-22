@@ -45,7 +45,6 @@ import com.sif.p6.dao.UtilisateurRepository;
 import com.sif.p6.entities.Spot;
 import com.sif.p6.entities.Topo;
 import com.sif.p6.entities.Utilisateur;
-
 import com.sif.p6.security.RoleEnum;
 
 
@@ -277,12 +276,3 @@ public class VisiteurController {
 	
 }
 	
-
-	
-	
-	
-
-
-
-
-

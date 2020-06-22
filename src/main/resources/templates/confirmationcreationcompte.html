@@ -16,7 +16,16 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-		<span class="green"><strong>Félicitations ! Votre compte a été crée avec succès ! Bienvenue chez les amis de l'escalade !</strong></span>		
+	<span class="green"><strong>Félicitations ! Votre compte a été crée avec succès ! Bienvenue chez les amis de l'escalade !</strong></span>
+	<dl>
+		<dt>Pour rappel, voici vos identifiants de connection : </dt>
+			
+		<dt>Pseudo:</dt>
+		<dd th:text="${utilisateur.pseudo}"></dd>
+				
+		<dt>Mot de passe:</dt>
+		<dd th:text="${utilisateur.password}"></dd>
+	</dl>			
 </div>
 
 </section>
