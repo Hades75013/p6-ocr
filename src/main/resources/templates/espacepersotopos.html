@@ -15,7 +15,7 @@ layout:decorate="~{Layout}">
 <body>
 
 <section layout:fragment="content">
-		
+
 <div id="categories_espace_perso" class="container">
 	
 	<div id="espace_perso_spot" class="container">
@@ -43,6 +43,40 @@ layout:decorate="~{Layout}">
 	</div>	
 		
 </div>	
+
+	
+
+	<div id="titre_tableau" class=container>
+		<h4><strong> MES TOPOS </strong></h4>
+	</div>
+	
+	<div id="mes_topos" class=container>			
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Statut</th>
+					<th><span class="glyphicon glyphicon-edit"></span></th>
+					<th><span class="glyphicon glyphicon-trash"></span></th>		
+					<th><span class="glyphicon glyphicon-plus-sign"></span></th>		
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="topo:${listeToposUtilisateur}">
+					<td th:text="${topo.nom}"></td>
+					<td th:text="${topo.spot.nom}"></td>
+					<td th:switch="${topo.statut}">
+	            		<p th:case="true" class="green"> Disponible </p>
+		    			<p th:case="false" class="red">Indisponible</p>
+					</td>
+					<td><a th:href="@{/user/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimertopo(idTopo=${topo.id})}">Supprimer</a></td>				
+					<td><a th:href="@{/user/topoDetails(idTopo=${topo.id})}">Details</a></td>					
+					<td><a th:href="@{/user/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary">Statut topo</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </section>
 

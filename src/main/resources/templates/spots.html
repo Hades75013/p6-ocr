@@ -20,27 +20,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
    
 <div id="recherche" class="container">
 	
-	<div id="boutonRechercherSpotByNom" class="container">		
+	<div id="formRechercherSpotByNom" class="container">		
 		<form class="form-inline" th:action="@{/listespots}" method="get">
 			<label>Nom : </label>
 			<input type="text" name="motCle" th:value="${motCle}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button id="boutonRechercher" class="btn btn-primary">Rechercher</button>	
 		</form>
 	</div>
 	
-	<div id="boutonRechercherSpotByDepartement" class="container">				
+	<div id="formRechercherSpotByDepartement" class="container">				
 		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
 			<label>Departement : </label>
 			<input type="text" name="motCleDep" th:value="${motCleDep}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button id="boutonRechercher" class="btn btn-primary">Rechercher</button>	
 		</form>	
 	</div>
 	
 </div>
 
-<div class="container">
+<div id="sites_d_escalade" class="container">
 
-<div id="sites_d_escalade" class="table-responsive col-lg-12 col-md-4 col-xs-12">
+<div class="table-responsive col-lg-12 col-md-4 col-xs-12">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -75,7 +75,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 </div>
      
     <div class="container">   
-        <div id="boutonAjoutSpot" class="container">
+        <div id="formAjoutSpot" class="container">
     		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
 			<button class="btn btn-primary">Ajouter spot</button>	
 			</form>	
@@ -87,7 +87,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
       	 		</li >
       		</ul>
     	</div> 
-        <div id="boutonRechercheTopoDispo" class="container" >		
+        <div id="formRechercheTopoDispo" class="container" >		
 			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
 			<button class="btn btn-primary">Rechercher Topo dispo</button>	
 			</form>

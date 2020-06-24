@@ -15,7 +15,7 @@ layout:decorate="~{Layout}">
 <body>
 
 <section layout:fragment="content">
-		
+
 <div id="categories_espace_perso" class="container">
 	
 	<div id="espace_perso_spot" class="container">
@@ -43,6 +43,35 @@ layout:decorate="~{Layout}">
 	</div>	
 		
 </div>	
+
+
+	
+	<div id="titre_tableau" class=container>
+		<h4><strong> MES DEMANDES DE RESERVATION </strong></h4>
+	</div>	
+	
+	<div id="listeDemandesReservation" class=container>		
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Demandeur</th><th>Statut</th>
+					<th><span class="glyphicon glyphicon-thumbs-up green"></span></th>
+					<th><span class="glyphicon glyphicon-thumbs-down red"></span></th>					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="reservation:${listeReservationsToposUtilisateur}">
+					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.topo.spot.nom}"></td>					
+					<td th:text="${reservation.utilisateur.pseudo}"></td>
+					<td th:text="${reservation.statut}"></td>					
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/resaOk(idReservation=${reservation.id})}"  class="btn btn-primary">Accepter</a></td>	
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/refusResa(idReservation=${reservation.id})}"  class="btn btn-primary">Refuser</a></td>				
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </section>
 

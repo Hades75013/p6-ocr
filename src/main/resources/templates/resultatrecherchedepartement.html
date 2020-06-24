@@ -81,8 +81,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 		</div>
 		<div class="container">
       		<ul class="pagination">
-      	 		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pages}">
-      	 			<a  th:href="@{/listespots(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
+      	 		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pagesDep}">
+      	 			<a  th:href="@{/rechercheParDepartement(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
       	 		</li >
       		</ul>
     	</div> 

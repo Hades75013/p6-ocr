@@ -15,7 +15,7 @@ layout:decorate="~{Layout}">
 <body>
 
 <section layout:fragment="content">
-		
+
 <div id="categories_espace_perso" class="container">
 	
 	<div id="espace_perso_spot" class="container">
@@ -43,6 +43,30 @@ layout:decorate="~{Layout}">
 	</div>	
 		
 </div>	
+
+	
+
+	<div id="titre_tableau" class=container>
+		<h4><strong> MES TOPOS (Détails) </strong></h4>
+	</div>
+	
+	<div id="mes_topos" class=container>			
+		<table class="table table-bordered table-striped">
+		
+			<thead>
+				<tr>
+					<th>Lieu</th><th>Date de parution</th><th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${topo.lieu}"></td>
+					<td th:text="${topo.dateParution}"></td>
+					<td th:text="${topo.description}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </section>
 

@@ -17,9 +17,22 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	
-		<div><strong>Votre demande a bien été envoyé au propriétaire du topo</strong></div>
+	<div class="panel panel-default">	
+		
+		<div class="panel-heading">
+		<strong class="green">Votre demande a bien été envoyé au propriétaire du topo</strong>
+		</div>
 			
+			<div class="panel-body">
+				<label>Topo demandé:</label>
+				<label th:text="${reservation.topo.nom}"></label>				
+			</div>
+			<div class="panel-body">
+				<label>Propriétaire:</label>
+				<label th:text="${reservation.topo.utilisateur.pseudo}"></label>				
+			</div>
+			
+	</div>
 </div>
 
 </section>

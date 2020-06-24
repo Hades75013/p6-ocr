@@ -7,6 +7,7 @@ layout:decorate="~{Layout}">
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <title>Les amis de l'escalade - Mise en relation et partage entre passionés</title>
 </head>
@@ -18,13 +19,11 @@ layout:decorate="~{Layout}">
 <div class="container">
 	<span class="green"><strong>Félicitations ! Votre compte a été crée avec succès ! Bienvenue chez les amis de l'escalade !</strong></span>
 	<dl>
-		<dt>Pour rappel, voici vos identifiants de connection : </dt>
+		<dt>Pour rappel, voici votre pseudo de connection : </dt>
 			
 		<dt>Pseudo:</dt>
 		<dd th:text="${utilisateur.pseudo}"></dd>
 				
-		<dt>Mot de passe:</dt>
-		<dd th:text="${utilisateur.password}"></dd>
 	</dl>			
 </div>
 

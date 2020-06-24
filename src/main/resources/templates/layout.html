@@ -15,7 +15,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <body >
     <header>
         <div id="titre_principal" class="container">
-        	<h1>Les amis de l'escalade</h1>
+        	<h1><strong>LES AMIS DE L'ESCALADE</strong></h1>
         </div>
         <div id="sous_titre" class="container">        
             <h2>S’adonner à l’escalade et profiter de la beauté des sites naturels</h2>
@@ -32,28 +32,28 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
            
         <div id="photos_accueil" class="img-responsive">
         	<figure>
-            	<img src="/67.7.jpg" class="img-thumbnail" alt="Photo Ablon" title = "Nos membres en action !" />
+            	<img src="/ablon.jpg" class="img-thumbnail" alt="Photo Ablon" title = "Nos membres en action !" />
             	<figcaption>Ablon-Haute Savoie</figcaption>
             </figure>
             <figure>
-            	<img src="/66.8.jpg" class="img-thumbnail" alt="Photo indoor" title = "Notre passion en tout temps !" />
+            	<img src="/indoor.jpg" class="img-thumbnail" alt="Photo indoor" title = "Notre passion en tout temps !" />
             	<figcaption>Session en indoor-Paris</figcaption>
             </figure>
             <figure>
-            	<img src="/74.3.jpg"class="img-thumbnail" alt="Photo Gorge du Tarn" title = "Des paysages sublimes !" />
+            	<img src="/gorgeDuTarn.jpg"class="img-thumbnail" alt="Photo Gorge du Tarn" title = "Des paysages sublimes !" />
             	<figcaption>Gorges du Tarn-Lozère</figcaption>
             </figure>
             <figure>
-            	<img src="/68.8.jpg" class="img-thumbnail" alt="Photo Eyrole" title = "Apprentissage a tout age !" />
+            	<img src="/eyroles.jpg" class="img-thumbnail" alt="Photo Eyroles" title = "Apprentissage a tout age !" />
             	<figcaption>Eyroles-Drôme</figcaption>
             </figure>
         </div>
         </article>
     </div>
     
-    <div class="container">
+    <div id="onglets" class="container">
 		<nav>
-			<ul class="nav nav-pills">
+			<ul class="nav nav-pills ">
 				<li><a th:href="@{listespots}"><strong>SPOTS D'ESCALADE</strong></a></li>
                 <li><a th:href="@{inscription}"><strong>S'INSCRIRE</strong></a></li>
                 <li><a th:href="@{connection}"><strong>SE CONNECTER</strong></a></li>
@@ -64,7 +64,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 	</div>
   
   	<div id="welcome" class="container " sec:authorize="isAuthenticated()">
-    	<h3><strong>Bienvenue <span sec:authentication="name"></span> !</strong></h3>
+    	<h3><strong><span class="glyphicon glyphicon-user"></span>  Bienvenue <span sec:authentication="name"></span> !</strong></h3>
 	</div>
   
   

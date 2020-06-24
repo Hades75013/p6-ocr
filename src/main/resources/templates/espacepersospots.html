@@ -15,7 +15,7 @@ layout:decorate="~{Layout}">
 <body>
 
 <section layout:fragment="content">
-		
+
 <div id="categories_espace_perso" class="container">
 	
 	<div id="espace_perso_spot" class="container">
@@ -43,6 +43,34 @@ layout:decorate="~{Layout}">
 	</div>	
 		
 </div>	
+
+	
+	<div id="titre_tableau" class=container>
+		<h4><strong> MES SPOTS </strong></h4>
+	</div>
+	
+	<div id="mes_spots" class=container>
+		<table class="table table-bordered table-striped">		
+			<thead>
+				<tr>
+					<th>Nom</th><th>Département</th>
+					<th><span class="glyphicon glyphicon-trash"></span></th>
+					<th><span class="glyphicon glyphicon-flag"></span></th>
+					<th><span class="glyphicon glyphicon-edit"></span></th>			
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="spot:${listeSpotsUtilisateur}">
+					<td th:text="${spot.nom}"></td>
+					<td th:text="${spot.departement}"></td>
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size})}">Supprimer</a></td>				
+					<td><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
+					<td><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>	
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
 
 </section>
 

@@ -21,7 +21,7 @@ public class Topo implements Serializable{
 	@Size(min=2)
 	private String nom;
 	
-	@Size(min=2)
+	
 	private String description;
 	
 	@Size(min=2)

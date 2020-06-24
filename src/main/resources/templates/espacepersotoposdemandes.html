@@ -15,7 +15,8 @@ layout:decorate="~{Layout}">
 <body>
 
 <section layout:fragment="content">
-		
+
+
 <div id="categories_espace_perso" class="container">
 	
 	<div id="espace_perso_spot" class="container">
@@ -42,7 +43,31 @@ layout:decorate="~{Layout}">
 		</form>	
 	</div>	
 		
-</div>	
+</div>		
+	
+	<div id="titre_tableau" class=container>
+		<h4><strong> TOPOS DEMANDES </strong></h4>
+	</div>
+	
+	<div id="listeDemandesPret" class=container>		
+		<table class="table table-bordered table-striped table-condensed">
+		
+			<thead>
+				<tr>
+					<th>Nom du topo</th><th>Nom du spot</th><th>Propriétaire</th><th>Statut</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="reservation:${listeReservationsUtilisateur}">
+					<td th:text="${reservation.topo.nom}"></td>
+					<td th:text="${reservation.topo.spot.nom}"></td>										
+					<td th:text="${reservation.topo.utilisateur.pseudo}"></td>
+					<td th:text="${reservation.statut}"></td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 
 </section>
 
