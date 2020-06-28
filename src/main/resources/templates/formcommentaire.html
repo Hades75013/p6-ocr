@@ -24,16 +24,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 			<thead>
 				<tr>
 					<th>Liste des commentaires</th><th>Ajouté par</th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-edit"></span></th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
+					<th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
+					<th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="commentaire:${listeCommentaires}">
 					<td th:text="${commentaire.verbatim}"></td>
 					<td th:text="${commentaire.utilisateur.pseudo}"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}">Modifier</a></td>				
-					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}">Supprimer</a></td>		
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiercommentaire(idCommentaire=${commentaire.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimercommentaire(idCommentaire=${commentaire.id}, idSpot=${commentaire.spot.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>		
 				</tr>
 			</tbody>
 		</table>
@@ -53,7 +53,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 						<span class="red" th:errors="${commentaire.verbatim}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="submit" class="btn btn-primary"><strong>Ajouter</strong></button>
 					</div>
 				</form>
 			</div>

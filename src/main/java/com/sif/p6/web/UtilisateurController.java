@@ -131,16 +131,6 @@ public class UtilisateurController {
 	
 		return "espacepersoreservations";
 	}
-
-	
-
-	@RequestMapping(value="/user/inscription")
-	public String ajouterUtilisateur(Model model) {
-		
-		model.addAttribute("utilisateur",new Utilisateur());
-
-		return "forminscription";
-	}
 	
 
 	@RequestMapping(value="/user/deconnection")
@@ -149,13 +139,6 @@ public class UtilisateurController {
 		 SecurityContextHolder.clearContext();	 
 
 		 return "redirect:/connection"; 
-	}
-	
-	
-	@RequestMapping(value="/user/connection")
-	public String Connection () {
-		 
-		 return "formconnection"; 
 	}
 
 	

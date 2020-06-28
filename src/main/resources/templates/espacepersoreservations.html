@@ -20,44 +20,44 @@ layout:decorate="~{Layout}">
 	
 	<div id="espace_perso_spot" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomesspots}" method="get">
-			<button class="btn btn-primary">MES SPOTS</button>	
+			<button class="btn btn-primary"><strong>MES SPOTS</strong></button>	
 		</form>	
 	</div>	
 	
 	<div id="espace_perso_topos" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomestopos}" method="get">
-			<button class="btn btn-primary">MES TOPOS</button>	
+			<button class="btn btn-primary"><strong>MES TOPOS</strong></button>	
 		</form>	
 	</div>	
 
 	<div id="espace_perso_topos_demandes" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersotoposdemandes}" method="get">
-			<button class="btn btn-primary">TOPOS DEMANDES</button>	
+			<button class="btn btn-primary"><strong>TOPOS DEMANDES</strong></button>	
 		</form>	
 	</div>
 	
 	<div id="espace_perso_reservations" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersoreservations}" method="get">
-			<button class="btn btn-primary">RESERVATIONS</button>	
+			<button class="btn btn-primary"><strong>RESERVATIONS</strong></button>	
 		</form>	
 	</div>	
 		
 </div>	
 
 
+<div id="titre_tableau" class="container">
+	<h4><strong> MES DEMANDES DE RESERVATION </strong></h4>
+</div>	
 	
-	<div id="titre_tableau" class=container>
-		<h4><strong> MES DEMANDES DE RESERVATION </strong></h4>
-	</div>	
+<div class="container">
 	
-	<div id="listeDemandesReservation" class=container>		
+	<div id="listeDemandesReservation" class="table-responsive col-lg-9 col-md-6 col-xs-6">		
 		<table class="table table-bordered table-striped">
-		
 			<thead>
 				<tr>
 					<th>Nom du topo</th><th>Nom du spot</th><th>Demandeur</th><th>Statut</th>
-					<th><span class="glyphicon glyphicon-thumbs-up green"></span></th>
-					<th><span class="glyphicon glyphicon-thumbs-down red"></span></th>					
+					<th class="green">Accepter</th>
+					<th class="red">Refuser</th>					
 				</tr>
 			</thead>
 			<tbody>
@@ -66,12 +66,14 @@ layout:decorate="~{Layout}">
 					<td th:text="${reservation.topo.spot.nom}"></td>					
 					<td th:text="${reservation.utilisateur.pseudo}"></td>
 					<td th:text="${reservation.statut}"></td>					
-					<td><a th:if="${reservation.enCours}" th:href="@{/user/resaOk(idReservation=${reservation.id})}"  class="btn btn-primary">Accepter</a></td>	
-					<td><a th:if="${reservation.enCours}" th:href="@{/user/refusResa(idReservation=${reservation.id})}"  class="btn btn-primary">Refuser</a></td>				
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/resaOk(idReservation=${reservation.id})}"  class="btn btn-primary"><strong><span class="glyphicon glyphicon-thumbs-up"></span></strong></a></td>	
+					<td><a th:if="${reservation.enCours}" th:href="@{/user/refusResa(idReservation=${reservation.id})}"  class="btn btn-primary"><strong><span class="glyphicon glyphicon-thumbs-down"></span></strong></a></td>				
 				</tr>
 			</tbody>
 		</table>
 	</div>
+
+</div>
 
 </section>
 

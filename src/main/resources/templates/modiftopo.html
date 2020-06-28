@@ -21,7 +21,7 @@ layout:decorate="~{layout}">
 	<div class="panel panel-default">	
 		<div class="panel-heading"><h4>Modification d'un topo</h4></div>
 			<div class="panel-body">
-				<form th:action="@{/user/savemodiftopo(idTopo=${topo.id})}" method="post">
+				<form th:object=${topo} th:action="@{/user/savemodiftopo(idTopo=${topo.id})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Nom :</label>
 						<input class="form-control" type="text" name="nom" th:value="${topo.nom}"/>
@@ -39,11 +39,11 @@ layout:decorate="~{layout}">
 					</div>
 					<div class="form-group">
 						<label class="control-label">Description :</label>
-						<textarea class="form-control" rows=10 cols=40 name="description" th:value="${topo.description}"></textarea>
+						<textarea class="form-control" rows=10 cols=40 name="description" th:field="*{description}"></textarea>
 						<span class="red" th:errors="${topo.description}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Modifier</button>
+					<button type="submit" class="btn btn-primary"><strong>Modifier</strong></button>
 					</div>
 				</form>
 			</div>

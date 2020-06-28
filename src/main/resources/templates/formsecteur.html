@@ -24,22 +24,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 			<thead>
 				<tr>
 					<th>Nom</th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-edit"></span></th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
-					<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-road"></span></th>
+					<th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
+					<th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
+					<th sec:authorize="isAuthenticated()">Voies</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="secteur:${listeSecteurs}">
 					<td th:text="${secteur.nom}"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiersecteur(idSecteur=${secteur.id})}">Modifier</a></td>				
-					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id})}">Supprimer</a></td>								
-					<td><a th:href="@{/user/ajoutervoie(idSecteur=${secteur.id})}">Voies</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiersecteur(idSecteur=${secteur.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>								
+					<td><a th:href="@{/user/ajoutervoie(idSecteur=${secteur.id})}"><span class="glyphicon glyphicon-road"></span></a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	</div>
+</div>
 
 <div class="container">
 
@@ -54,13 +54,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 						<span class="red" th:errors="${secteur.nom}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Ajouter secteur</button>
+					<button type="submit" class="btn btn-primary"><strong>Ajouter secteur</strong></button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 </section>

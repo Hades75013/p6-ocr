@@ -20,63 +20,66 @@ layout:decorate="~{Layout}">
 	
 	<div id="espace_perso_spot" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomesspots}" method="get">
-			<button class="btn btn-primary">MES SPOTS</button>	
+			<button class="btn btn-primary"><strong>MES SPOTS</strong></button>	
 		</form>	
 	</div>	
 	
 	<div id="espace_perso_topos" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomestopos}" method="get">
-			<button class="btn btn-primary">MES TOPOS</button>	
+			<button class="btn btn-primary"><strong>MES TOPOS</strong></button>	
 		</form>	
 	</div>	
 
 	<div id="espace_perso_topos_demandes" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersotoposdemandes}" method="get">
-			<button class="btn btn-primary">TOPOS DEMANDES</button>	
+			<button class="btn btn-primary"><strong>TOPOS DEMANDES</strong></button>	
 		</form>	
 	</div>
 	
 	<div id="espace_perso_reservations" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersoreservations}" method="get">
-			<button class="btn btn-primary">RESERVATIONS</button>	
+			<button class="btn btn-primary"><strong>RESERVATIONS</strong></button>	
 		</form>	
-	</div>	
+	</div>
 		
 </div>	
 
 	
 
-	<div id="titre_tableau" class=container>
-		<h4><strong> MES TOPOS </strong></h4>
-	</div>
+<div id="titre_tableau" class=container>
+	<h4><strong> MES TOPOS </strong></h4>
+</div>
 	
-	<div id="mes_topos" class=container>			
-		<table class="table table-bordered table-striped">
-		
-			<thead>
+<div class="container">
+
+	<div class="table-responsive col-lg-12 col-md-6 col-xs-12">		
+	<table class="table table-bordered table-striped">		
+		<thead>
 				<tr>
 					<th>Nom du topo</th><th>Nom du spot</th><th>Statut</th>
-					<th><span class="glyphicon glyphicon-edit"></span></th>
-					<th><span class="glyphicon glyphicon-trash"></span></th>		
-					<th><span class="glyphicon glyphicon-plus-sign"></span></th>		
+					<th>Modifier</th>
+					<th>Supprimer</th>		
+					<th>Details</th>		
 				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="topo:${listeToposUtilisateur}">
-					<td th:text="${topo.nom}"></td>
-					<td th:text="${topo.spot.nom}"></td>
-					<td th:switch="${topo.statut}">
-	            		<p th:case="true" class="green"> Disponible </p>
-		    			<p th:case="false" class="red">Indisponible</p>
-					</td>
-					<td><a th:href="@{/user/modifiertopo(idTopo=${topo.id})}">Modifier</a></td>
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimertopo(idTopo=${topo.id})}">Supprimer</a></td>				
-					<td><a th:href="@{/user/topoDetails(idTopo=${topo.id})}">Details</a></td>					
-					<td><a th:href="@{/user/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary">Statut topo</a></td>
-				</tr>
-			</tbody>
-		</table>
+		</thead>
+		<tbody>
+			<tr th:each="topo:${listeToposUtilisateur}">
+				<td th:text="${topo.nom}"></td>
+				<td th:text="${topo.spot.nom}"></td>
+				<td th:switch="${topo.statut}">
+	            	<p th:case="true" class="green"> Disponible </p>
+		    		<p th:case="false" class="red">Indisponible</p>
+				</td>
+				<td><a th:href="@{/user/modifiertopo(idTopo=${topo.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>
+				<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimertopo(idTopo=${topo.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>				
+				<td><a th:href="@{/user/topoDetails(idTopo=${topo.id})}"><span class="glyphicon glyphicon-plus-sign"></span></a></td>					
+				<td><a th:href="@{/user/statuttopo(idTopo=${topo.id})}"  class="btn btn-primary"><strong>Statut topo</strong></a></td>
+			</tr>
+		</tbody>
+	</table>
 	</div>
+
+</div>
 
 </section>
 

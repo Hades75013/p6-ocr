@@ -19,7 +19,8 @@ layout:decorate="~{layout}">
 
 <div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	
-		<div class="panel-heading"><h4>Ajout d'un spot</h4></div>
+		<div class="panel-heading"><h4>Ajout d'un spot</h4>
+		</div>
 			<div class="panel-body">
 				<form th:action="@{/user/saveajoutspot}" method="post">
 					<div class="form-group">
@@ -33,13 +34,15 @@ layout:decorate="~{layout}">
 						<span class="red" th:errors="${spot.departement}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Ajouter spot</button>
+					<button type="submit" class="btn btn-primary"><strong>Ajouter spot</strong></button>
 					</div>
 				</form>
 			</div>
 	</div>
 </div>
+
 </div>
+
 </section>
 
 <footer>

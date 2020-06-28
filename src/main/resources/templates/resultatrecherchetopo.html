@@ -17,28 +17,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
 <section layout:fragment="content">
 
-
 <div id="recherche" class="container">
 	
 	<div id="boutonRechercherSpotByNom" class="container">		
 		<form class="form-inline" th:action="@{/listespots}" method="get">
 			<label>Nom : </label>
 			<input type="text" name="motCle" th:value="${motCle}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>
-	</div>
-	
+	</div>	
 	<div id="boutonRechercherSpotByDepartement" class="container">				
 		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
 			<label>Departement : </label>
 			<input type="text" name="motCleDep" th:value="${motCleDep}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>	
 	</div>
 	
 </div>
 
-    <div class="container">   
+<div class="container">   
 
 	<div id="sites_d_escalade" class="table-responsive col-lg-12 col-md-4 col-xs-12">
 		<table class="table table-bordered table-striped">
@@ -61,10 +59,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 			</tbody>
 		</table>
 	</div>
-	</div>
+
+</div>
 
      
-    <div class="container">   
+<div class="container"> 
+  
         <div id="boutonAjoutSpot" class="container">
     		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
 			<button class="btn btn-primary">Ajouter spot</button>	
@@ -79,10 +79,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
     	</div> 
         <div id="boutonRechercheTopoDispo" class="container" >		
 			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
-			<button class="btn btn-primary">Rechercher Topo dispo</button>	
+			<button class="btn btn-primary"><strong>Rechercher Topo dispo</strong></button>	
 			</form>
 		</div>
-	</div>
+
+</div>
 	
 </section>
 

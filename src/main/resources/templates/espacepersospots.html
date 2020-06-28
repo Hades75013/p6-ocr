@@ -20,25 +20,25 @@ layout:decorate="~{Layout}">
 	
 	<div id="espace_perso_spot" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomesspots}" method="get">
-			<button class="btn btn-primary">MES SPOTS</button>	
+			<button class="btn btn-primary"><strong>MES SPOTS</strong></button>	
 		</form>	
 	</div>	
 	
 	<div id="espace_perso_topos" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersomestopos}" method="get">
-			<button class="btn btn-primary">MES TOPOS</button>	
+			<button class="btn btn-primary"><strong>MES TOPOS</strong></button>	
 		</form>	
 	</div>	
 
 	<div id="espace_perso_topos_demandes" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersotoposdemandes}" method="get">
-			<button class="btn btn-primary">TOPOS DEMANDES</button>	
+			<button class="btn btn-primary"><strong>TOPOS DEMANDES</strong></button>	
 		</form>	
 	</div>
 	
 	<div id="espace_perso_reservations" class="container">
     	<form class="form-inline" th:action="@{/user/espacepersoreservations}" method="get">
-			<button class="btn btn-primary">RESERVATIONS</button>	
+			<button class="btn btn-primary"><strong>RESERVATIONS</strong></button>	
 		</form>	
 	</div>	
 		
@@ -54,18 +54,18 @@ layout:decorate="~{Layout}">
 			<thead>
 				<tr>
 					<th>Nom</th><th>Département</th>
-					<th><span class="glyphicon glyphicon-trash"></span></th>
-					<th><span class="glyphicon glyphicon-flag"></span></th>
-					<th><span class="glyphicon glyphicon-edit"></span></th>			
+					<th>Supprimer</th>
+					<th>Secteurs</th>
+					<th>Commentaires</th>			
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="spot:${listeSpotsUtilisateur}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size})}">Supprimer</a></td>				
-					<td><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
-					<td><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>	
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size})}"><span class="glyphicon glyphicon-trash"></span></a></td>				
+					<td><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}"><span class="glyphicon glyphicon-flag"></span></a></td>									
+					<td><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}"><span class="glyphicon glyphicon-edit"></span></a></td>	
 				</tr>
 			</tbody>
 		</table>

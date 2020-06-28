@@ -36,7 +36,7 @@ layout:decorate="~{layout}">
 		    			<p th:case="false" class="red">Indisponible</p>
 					</td>
 					<td th:text="${topo.utilisateur.pseudo}"></td>
-					<td ><a th:if="${topo.statut}" th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get" class="btn btn-primary" >Demander topo</a></td>
+					<td th:if="${topo.statut}"><a th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get" class="btn btn-primary"><strong>Demander topo</strong></a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -47,7 +47,8 @@ layout:decorate="~{layout}">
 	
 <div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	
-		<div class="panel-heading"><h4>Ajout d'un topo</h4></div>
+		<div class="panel-heading"><h4>Ajout d'un topo</h4>
+		</div>
 			<div class="panel-body">
 				<form th:action="@{/user/saveajouttopo(idSpot=${idSpot})}" method="post">
 					<div class="form-group">
@@ -71,19 +72,20 @@ layout:decorate="~{layout}">
 						<span class="red" th:errors="${topo.description}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Ajouter</button>
+					<button type="submit" class="btn btn-primary"><strong>Ajouter</strong></button>
 					</div>
 				</form>
 			</div>
 	</div>
 </div>
+
+</div>
+
 </section>
 
 <footer>
 <p layout:fragment="footer"></p>
 </footer>
-
-
 
 </body>
 </html>

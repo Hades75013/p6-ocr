@@ -15,7 +15,7 @@ public class Commentaire implements Serializable {
 
 	@Id@GeneratedValue
 	private Long id;
-	@Size(max=200)
+	@Size(max=500)
 	private String verbatim;
 	
 	@ManyToOne

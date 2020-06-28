@@ -32,4 +32,9 @@
   Liste des contraintes fonctionnelles :    
   ● C1 : Le vocabulaire de l’escalade doit être utilisé : site, spot, voie, longueur, grimpeur, point ou spit, cotation, topo.    
   ● C2 : Le site doit être responsive.    
-  ● C3 : Le site doit être sécurisé.  
+  ● C3 : Le site doit être sécurisé
+
+BASE DE DONNEES MySQL: p6-escalade
+user = root
+password = 7513
+Créer et importer la base de données avec les dumps fournis (Create DB P6-Escalade + Jeu_de_demo_p6-escalade)

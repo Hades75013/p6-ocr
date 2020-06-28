@@ -1,9 +1,11 @@
-.red{
-	color : red;
+.red
+{
+	color : rgb(210,0,0);
 }
 
-.green{
-	color : green;
+.green
+{
+	color : rgb(80,160,10);
 }
 
 body
@@ -17,7 +19,6 @@ body
 header
 {
 	font-style: italic;
-	background-color:white;
 	text-align: center;
 }
 
@@ -30,7 +31,7 @@ header
 
 #titre_principal
 {
-	color : rgb(0,130,0);
+	color : rgb(115,115,115);
 }
 
 #titre_tableau
@@ -38,7 +39,6 @@ header
 	font-size: 1em;
 	font-style: italic;
 	margin-top : 30px;
-	color : #0000a0;
 }
 
 #photos_accueil
@@ -68,7 +68,8 @@ header
     margin-left: 10px;
 }
 
-#categories_espace_perso{
+#categories_espace_perso
+{
 	margin-top : 30px;
 }
 
@@ -122,7 +123,7 @@ nav a
 
 
 #formulaire
-{
+{	
 	display: flex;
 	justify-content: center;
 }
@@ -131,23 +132,33 @@ nav a
 {
 	display: flex;
 	justify-content: center;
-	color : #0000a0;
+	color : rgb(115,115,115);
+	
 }
 
 button
- {
+{
  	margin-right: 10px;
  }
  
-.glyphicon-heart{
-	
+.glyphicon-heart
+{
 		color : #ff00ff;
 } 
+
+.btn-primary
+{
+  	padding: 10px;
+  	border: solid black;
+  	border-radius : 5px;
+  	background-color: #c0c0c0;
+  	color:black;
+  	font-style: italic;	
+}
  
 footer
 {
 	text-align: center;
-	margin-top : 30px;
-	
+	margin-top : 30px;	
 }
 

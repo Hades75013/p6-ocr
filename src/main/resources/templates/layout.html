@@ -27,7 +27,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
     		<p>Bonjour et bienvenue sur le site de l'association <strong>Les amis de l'escalade.</strong></p>
     		<p>L’escalade est un sport qui ne cesse d’attirer de plus en plus d’adeptes avides de nouvelles sensations. Pour pouvoir le pratiquer convenablement et en toute sécurité, il vaut mieux connaitre les sites de grimpe.</p>
     		<p>Notre association a pour but de mettre en relation nos membres afin qu'ils puissent échanger et partager entre eux leurs expériences concernant les nombreux sites d'escalade.</p>
-    		<p>Alors impatient de rejoindre notre communauté de grimpeurs ?</p>
+    		<p><strong>Alors impatient de rejoindre notre communauté de grimpeurs ?</strong></p>
     	
            
         <div id="photos_accueil" class="img-responsive">
@@ -54,9 +54,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
     <div id="onglets" class="container">
 		<nav>
 			<ul class="nav nav-pills ">
-				<li><a th:href="@{listespots}"><strong>SPOTS D'ESCALADE</strong></a></li>
-                <li><a th:href="@{inscription}"><strong>S'INSCRIRE</strong></a></li>
-                <li><a th:href="@{connection}"><strong>SE CONNECTER</strong></a></li>
+				<li sec:authorize="!isAuthenticated()"><a th:href="@{listespots}"><strong>SPOTS D'ESCALADE</strong></a></li>
+				<li sec:authorize="isAuthenticated()"><a  th:href="@{/user/listespots}"><strong>SPOTS D'ESCALADE</strong></a></li>
+                <li sec:authorize="!isAuthenticated()"><a th:href="@{inscription}"><strong>S'INSCRIRE</strong></a></li>
+                <li sec:authorize="!isAuthenticated()"><a th:href="@{connection}"><strong>SE CONNECTER</strong></a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/user/espaceperso}"><strong>ESPACE PERSO</strong></a></li>             	
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/user/deconnection}"><strong>SE DECONNECTER</strong></a></li>
 			</ul>

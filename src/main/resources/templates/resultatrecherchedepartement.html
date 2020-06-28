@@ -17,14 +17,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 
 <section layout:fragment="content">
 
-
 <div id="recherche" class="container">
 	
 	<div id="boutonRechercherSpotByNom" class="container">		
 		<form class="form-inline" th:action="@{/listespots}" method="get">
 			<label>Nom : </label>
 			<input type="text" name="motCle" th:value="${motCle}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>
 	</div>
 	
@@ -32,23 +31,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
 			<label>Departement : </label>
 			<input type="text" name="motCleDep" th:value="${motCleDep}">
-			<button class="btn btn-primary">Rechercher</button>	
+			<button class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>	
 	</div>	
+
 </div>
 
-   <div class="container">   
+<div class="container">   
 
 	<div id="sites_d_escalade" class="table-responsive col-lg-12 col-md-4 col-xs-12">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
 					<th>Nom</th><th>Département</th><th>Ajouté par</th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-cog"></span></th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
-					<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-flag"></span></th>
-					<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-edit"></span></th>
-					<th sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-globe"></span></th>
+					<th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
+					<th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
+					<th sec:authorize="isAuthenticated()">Secteurs</th>
+					<th sec:authorize="isAuthenticated()">Commentaires</th>
+					<th sec:authorize="isAuthenticated()">Topos</th>
 					<th>Officiel</th>
 				</tr>
 			</thead>
@@ -57,11 +57,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
 					<td th:text="${spot.utilisateur.pseudo}"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}">Modifier</a></td>				
-					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}">Supprimer</a></td>				
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}">Secteurs</a></td>									
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}">Commentaires</a></td>
-					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutertopo(idSpot=${spot.id})}">Topos</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierspot(idSpot=${spot.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size}, motCle=${motCle})}"><span class="glyphicon glyphicon-trash"></span></a></td>				
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}"><span class="glyphicon glyphicon-flag"></span></a></td>									
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}"><span class="glyphicon glyphicon-edit"></span></a></td>
+					<td sec:authorize="isAuthenticated()"><a th:href="@{/user/ajoutertopo(idSpot=${spot.id})}"><span class="glyphicon glyphicon-globe"></span></a></td>
 					<td th:switch="${spot.tagOfficiel}" >
 	            		<p th:case="true"><span class="glyphicon glyphicon-heart"></span></p>
 		    			<p th:case="false" ></p>
@@ -72,26 +72,30 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 			</tbody>
 		</table>
 	</div>
-   </div> 
-   <div class="container">   
-        <div id="boutonAjoutSpot" class="container">
-    		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
-			<button class="btn btn-primary">Ajouter spot</button>	
-			</form>	
-		</div>
-		<div class="container">
-      		<ul class="pagination">
-      	 		<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pagesDep}">
-      	 			<a  th:href="@{/rechercheParDepartement(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
-      	 		</li >
-      		</ul>
-    	</div> 
-        <div id="boutonRechercheTopoDispo" class="container" >		
-			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
-			<button class="btn btn-primary">Rechercher Topo dispo</button>	
-			</form>
-		</div>
+
+</div> 
+   
+<div class="container">  
+ 
+	<div id="boutonAjoutSpot" class="container">
+		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
+			<button class="btn btn-primary"><strong>Ajouter spot</strong></button>	
+		</form>	
 	</div>
+	<div class="container">
+      	<ul class="pagination">
+      	 	<li th:class="${pageCourante}==${status.index}?'active':''" th:each="p,status:${pagesDep}">
+      	 		<a  th:href="@{/rechercheParDepartement(page=${status.index}, size=${size}, motCle=${motCle})}" th:text="${status.index}"></a>
+      	 	</li >
+      	</ul>
+    </div> 
+    <div id="boutonRechercheTopoDispo" class="container" >		
+		<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
+			<button class="btn btn-primary"><strong>Rechercher Topos dispo</strong></button>	
+		</form>
+	</div>
+	
+</div>
     
     
 </section>

@@ -24,10 +24,10 @@ layout:decorate="~{layout}">
 				<form th:action="@{/admin/savemodifcommentaire(idCommentaire=${commentaire.id}, idSpot=${idSpot})}" method="post">
 					<div class="form-group">
 						<label class="control-label">Verbatim :</label>
-						<textarea class="form-control" rows=10 cols=40 name="verbatim" th:value="${commentaire.verbatim}"></textarea>						<span class="red" th:errors="${commentaire.verbatim}"></span>
+						<input><textarea class="form-control" rows=10 cols=40 name="verbatim" th:value="${commentaire.verbatim}"></textarea>						<span class="red" th:errors="${commentaire.verbatim}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Modifier</button>
+					<button type="submit" class="btn btn-primary"><strong>Modifier</strong></button>
 					</div>
 				</form>
 			</div>

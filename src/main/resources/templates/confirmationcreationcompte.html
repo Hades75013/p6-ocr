@@ -17,14 +17,20 @@ layout:decorate="~{Layout}">
 <section layout:fragment="content">
 
 <div class="container">
-	<span class="green"><strong>Félicitations ! Votre compte a été crée avec succès ! Bienvenue chez les amis de l'escalade !</strong></span>
-	<dl>
-		<dt>Pour rappel, voici votre pseudo de connection : </dt>
+	
+	<div class="panel panel-default">	
+	
+		<div class="panel-heading">
+			<span class="green"><strong>Félicitations ! Votre compte a été crée avec succès ! <br>Bienvenue chez les amis de l'escalade !</strong></span>
+		</div>
 			
-		<dt>Pseudo:</dt>
-		<dd th:text="${utilisateur.pseudo}"></dd>
-				
-	</dl>			
+		<div class="panel-body">
+				<label>Pour rappel, voici votre pseudo de connection :</label><br>
+				<label th:text="${utilisateur.pseudo}"></label>				
+		</div>
+		
+	</div>	
+			
 </div>
 
 </section>

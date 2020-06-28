@@ -28,6 +28,10 @@ layout:decorate="~{Layout}">
 				<label th:text="${reservation.topo.nom}"></label>				
 			</div>
 			<div class="panel-body">
+				<label>Spot:</label>
+				<label th:text="${reservation.topo.spot.nom}"></label>				
+			</div>
+			<div class="panel-body">
 				<label>Propriétaire:</label>
 				<label th:text="${reservation.topo.utilisateur.pseudo}"></label>				
 			</div>

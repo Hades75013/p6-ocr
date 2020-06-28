@@ -24,16 +24,16 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 			<thead>
 				<tr>
 					<th>Nom</th><th>Cotation</th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-edit"></span></th>
-					<th sec:authorize="hasAuthority('ADMIN')"><span class="glyphicon glyphicon-trash"></span></th>
+					<th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
+					<th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="longueur:${listeLongueurs}">
 					<td th:text="${longueur.nom}"></td>
 					<td th:text="${longueur.cotation}"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierlongueur(idLongueur=${longueur.id})}">Modifier</a></td>				
-					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerlongueur(idLongueur=${longueur.id},idVoie=${longueur.voie.id})}">Supprimer</a></td>								
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifierlongueur(idLongueur=${longueur.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>				
+					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimerlongueur(idLongueur=${longueur.id},idVoie=${longueur.voie.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>								
 				</tr>
 			</tbody>
 		</table>
@@ -59,7 +59,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 						<span class="red" th:errors="${longueur.cotation}"></span>
 					</div>
 					<div>
-					<button type="submit" class="btn btn-primary">Ajouter longueur</button>
+					<button type="submit" class="btn btn-primary"><strong>Ajouter longueur</strong></button>
 					</div>
 				</form>
 			</div>
