@@ -29,7 +29,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 import com.sif.p6.security.BCryptManagerUtil;
-import com.sif.p6.security.RoleEnum;
 
 
 @SuppressWarnings("serial")

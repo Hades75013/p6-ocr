@@ -1,18 +1,7 @@
-.red
-{
-	color : rgb(210,0,0);
-}
-
-.green
-{
-	color : rgb(80,160,10);
-}
-
 body
 {
 	font-family: verdana,arial, sans-serif;
 	background-color:rgb(255,220,185);
-	
 }
 
 
@@ -21,58 +10,6 @@ header
 	font-style: italic;
 	text-align: center;
 }
-
-.container
-{
-	text-align: center;
-	display: flex;
-    justify-content: center;
-}
-
-#titre_principal
-{
-	color : rgb(115,115,115);
-}
-
-#titre_tableau
-{
-	font-size: 1em;
-	font-style: italic;
-	margin-top : 30px;
-}
-
-#photos_accueil
-{
-	display : flex;	
-}
-
-#sites_d_escalade, #recherche
-{
-	margin-top : 30px;
-}
-
-#formAjoutSpot, #formRechercheSpotByNom
-{
-    display: flex;
-    justify-content: flex-start;   
-}
-
-#formRechercheTopoDispo, #formRechercheSpotByDepartement
-{
-    display: flex;
-    justify-content: flex-end;
-}
-
-#boutonRechercher
-{
-    margin-left: 10px;
-}
-
-#categories_espace_perso
-{
-	margin-top : 30px;
-}
-
 
 th
 {
@@ -102,7 +39,6 @@ nav ul
 	display : flex;
 	flex-wrap: nowrap;
 	justify-content: center;
-	
 }
 
 nav li 
@@ -121,26 +57,33 @@ nav a
 	text-decoration: none;
 }
 
-
-#formulaire
-{	
-	display: flex;
-	justify-content: center;
-}
-
-#welcome
-{
-	display: flex;
-	justify-content: center;
-	color : rgb(115,115,115);
-	
-}
-
 button
 {
  	margin-right: 10px;
  }
- 
+
+footer
+{
+	text-align: center;
+	margin-top : 30px;	
+}
+
+.red
+{
+	color : rgb(210,0,0);
+}
+
+.green
+{
+	color : rgb(80,160,10);
+}
+.container
+{
+	text-align: center;
+	display: flex;
+    justify-content: center;
+}
+
 .glyphicon-heart
 {
 		color : #ff00ff;
@@ -156,9 +99,41 @@ button
   	font-style: italic;	
 }
  
-footer
+#titre_principal
 {
-	text-align: center;
-	margin-top : 30px;	
+	color : rgb(115,115,115);
 }
 
+#titre_tableau
+{
+	font-size: 1em;
+	font-style: italic;
+	margin-top : 30px;
+}
+
+#sites_d_escalade, #recherche
+{
+	margin-top : 30px;
+}
+
+#photos_accueil, #formAjoutSpot, #formRechercheSpotByNom, 
+#formRechercheTopoDispo, #formRechercheSpotByDepartement
+{
+    display: flex;
+}
+
+#boutonRechercher
+{
+    margin-top: 10px;
+}
+
+#welcome
+{
+	display: flex;
+	justify-content: center;
+	color : rgb(115,115,115);
+}
+#categories_espace_perso
+{
+	margin-top : 30px;
+}

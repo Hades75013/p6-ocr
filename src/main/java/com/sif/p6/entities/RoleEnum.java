@@ -1,4 +1,4 @@
-package com.sif.p6.security;
+package com.sif.p6.entities;
 
 public enum RoleEnum {
     USER,

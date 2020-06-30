@@ -16,22 +16,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <body>
 
 <section layout:fragment="content">
-
    
 <div id="recherche" class="container">
 	
-	<div id="formRechercherSpotByNom" class="container col-lg-4 col-md-4 col-xs-6 ">		
-		<form class="form-inline" th:action="@{/listespots}" method="get">
-			<label>Nom : </label>
-			<input type="text" name="motCle" th:value="${motCle}">
+	<div id="formRechercheSpotByNom" class="container">   
+		<form  th:action="@{/listespots}" method="get">
+			<label>Nom : </label><br>
+			<input type="text" name="motCle" th:value="${motCle}"><br>
 			<button id="boutonRechercher" class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>
 	</div>
-	
-	<div id="formRechercherSpotByDepartement" class="container">				
-		<form class="form-inline" th:action="@{/rechercheParDepartement}" method="get">
-			<label>Departement : </label>
-			<input type="text" name="motCleDep" th:value="${motCleDep}">
+
+	<div id="formRechercheSpotByDepartement" class="container">   	
+		<form  th:action="@{/rechercheParDepartement}" method="get">
+			<label>Departement : </label><br>
+			<input type="text" name="motCleDep" th:value="${motCleDep}"><br>
 			<button id="boutonRechercher" class="btn btn-primary"><strong>Rechercher</strong></button>	
 		</form>	
 	</div>
@@ -74,9 +73,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 </div>
 </div>
      
-    <div class="container">   
+    <div class="container"> 
+      
         <div id="formAjoutSpot" class="container">
-    		<form sec:authorize="isAuthenticated()" class="form-inline" th:action="@{/user/ajouterspot}" method="get">
+    		<form sec:authorize="isAuthenticated()" th:action="@{/user/ajouterspot}" method="get">
 			<button class="btn btn-primary"><strong>Ajouter spot</strong></button>	
 			</form>	
 		</div>
@@ -88,10 +88,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
       		</ul>
     	</div> 
         <div id="formRechercheTopoDispo" class="container" >		
-			<form class="form-inline" th:action="@{/rechercheParTopoDispo}" method="get">
+			<form th:action="@{/rechercheParTopoDispo}" method="get">
 			<button class="btn btn-primary"><strong>Rechercher Topos dispo</strong></button>	
 			</form>
 		</div>
+	
 	</div>
 	
 </section>
