@@ -267,7 +267,7 @@ public class UtilisateurController {
 
 		spotRepository.deleteById(idSpot);
 
-		return "redirect:/user/espaceperso";
+		return "redirect:/user/espacepersomesspots";
 	}
 
 	

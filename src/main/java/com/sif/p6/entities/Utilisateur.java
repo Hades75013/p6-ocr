@@ -20,9 +20,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -60,7 +59,7 @@ public class Utilisateur implements Serializable, UserDetails{
 	@OneToMany(mappedBy="utilisateur")
 	private Set<Spot> spots;
 	
-	@OneToMany(mappedBy="utilisateur")
+	@OneToMany(mappedBy="utilisateur", cascade=CascadeType.ALL)
 	private Set<Topo> topos;
 	
 	@OneToMany(mappedBy="utilisateur")
@@ -70,7 +69,6 @@ public class Utilisateur implements Serializable, UserDetails{
 	private Set<Reservation> reservations;
 	
 	@ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
-	@Cascade(value = CascadeType.REMOVE)
     @JoinTable(
             indexes = {@Index(name = "INDEX_UTILISATEUR_ROLE", columnList = "id_utilisateur")},
             name = "roles",

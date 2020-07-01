@@ -63,7 +63,7 @@ layout:decorate="~{Layout}">
 				<tr th:each="spot:${listeSpotsUtilisateur}">
 					<td th:text="${spot.nom}"></td>
 					<td th:text="${spot.departement}"></td>
-					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id}, page=${pageCourante}, size=${size})}"><span class="glyphicon glyphicon-trash"></span></a></td>				
+					<td><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/user/supprimerspot(idSpot=${spot.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>				
 					<td><a th:href="@{/user/ajoutersecteur(idSpot=${spot.id})}"><span class="glyphicon glyphicon-flag"></span></a></td>									
 					<td><a th:href="@{/user/ajoutercommentaire(idSpot=${spot.id})}"><span class="glyphicon glyphicon-edit"></span></a></td>	
 				</tr>
