@@ -1,5 +1,4 @@
 # P6-Openclassroom : Les amis de l'escalade
-
 ## Recueil des besoins client 
   
 ### Objet
