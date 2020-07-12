@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 
 public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
-
 	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	 

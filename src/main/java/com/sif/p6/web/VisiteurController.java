@@ -1,7 +1,6 @@
 package com.sif.p6.web;
 
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,6 +29,7 @@ import com.sif.p6.entities.Utilisateur;
 import com.sif.p6.entities.RoleEnum;
 
 
+/*Méthodes accessibles pour le simple visiteur sans authentification*/
 
 @Controller
 public class VisiteurController {

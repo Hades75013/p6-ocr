@@ -1,7 +1,6 @@
 package com.sif.p6.web;
 
 
-
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,17 +17,17 @@ import com.sif.p6.dao.CommentaireRepository;
 import com.sif.p6.dao.LongueurRepository;
 import com.sif.p6.dao.SecteurRepository;
 import com.sif.p6.dao.SpotRepository;
-import com.sif.p6.dao.TopoRepository;
 import com.sif.p6.dao.VoieRepository;
 
 import com.sif.p6.entities.Commentaire;
 import com.sif.p6.entities.Longueur;
 import com.sif.p6.entities.Secteur;
 import com.sif.p6.entities.Spot;
-import com.sif.p6.entities.Topo;
 import com.sif.p6.entities.Utilisateur;
 import com.sif.p6.entities.Voie;
 
+
+/*Méthodes exclusivement accessibles par l'administrateur (role Admin) via l'onglet SPOT*/
 
 
 @Controller
@@ -49,10 +48,21 @@ public class AdminController {
 	@Autowired
 	private CommentaireRepository commentaireRepository;
 
-	@Autowired
-	private TopoRepository topoRepository;
 
 
+	@RequestMapping(value="/admin/taguerspot")
+	public String taguerSpot(Model model,Long idSpot) {
+
+		Optional<Spot> optionalspot=spotRepository.findById(idSpot);
+		Spot spot = optionalspot.get();
+		spot.setTagOfficiel(!spot.isTagOfficiel());
+
+		spotRepository.save(spot);		
+		
+		return "redirect:/user/listespots";
+	}
+	
+	
 	@RequestMapping(value="/admin/modifierspot", method=RequestMethod.GET)
 	public String modifierSpot(Model model, Long idSpot) {
 
@@ -199,7 +209,6 @@ public class AdminController {
 	}
 
 	
-
 	@RequestMapping(value="/admin/savemodiflongueur", method=RequestMethod.POST)
 	public String sauverModifLongueur(Model model, @Valid Longueur longueur, Long idLongueur, Long idVoie, BindingResult bindingResult) {
 
@@ -277,65 +286,4 @@ public class AdminController {
 	}
 
 
-	@RequestMapping(value="/admin/modifiertopo", method=RequestMethod.GET)
-	public String modifierTopo(Model model, Long idTopo) {
-
-		Optional<Topo> optionaltopo= topoRepository.findById(idTopo);
-		Topo topo = optionaltopo.get();
-
-		model.addAttribute("topo",topo);
-
-		return "modiftopo";
-	}
-
-	
-	@RequestMapping(value="/admin/savemodiftopo", method=RequestMethod.POST)
-	public String sauverModifTopo(Model model, @Valid Topo topo, Long idTopo, BindingResult bindingResult) {
-
-   		model.addAttribute("topo",topo);
-
-		if(bindingResult.hasErrors()) {
-
-	   	 	return "modiftopo";
-		}
-
-		Topo topoModifie = topoRepository.getOne(idTopo);
-		topoModifie.setNom(topo.getNom());
-		topoModifie.setLieu(topo.getLieu());
-		topoModifie.setDateParution(topo.getDateParution());
-		topoModifie.setDescription(topo.getDescription());
-
-		Utilisateur utilisateur = (Utilisateur) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		topo.setUtilisateur(utilisateur);
-				
-		topoRepository.save(topoModifie);
-		
-		return "redirect:/user/espacepersomestopos";
-	}
-
-	
-	@RequestMapping(value="/admin/supprimertopo", method=RequestMethod.GET)
-	public String supprimerTopo (Long idTopo) {
-
-		topoRepository.deleteById(idTopo);
-
-		return "redirect:/user/espaceperso";
-	}
-
-	
-	@RequestMapping(value="/admin/taguerspot")
-	public String taguerSpot(Model model,Long idSpot) {
-
-		Optional<Spot> optionalspot=spotRepository.findById(idSpot);
-		Spot spot = optionalspot.get();
-		spot.setTagOfficiel(!spot.isTagOfficiel());
-
-		spotRepository.save(spot);		
-		
-		return "redirect:/user/listespots";
-	}
-
-	
-
-	
 }

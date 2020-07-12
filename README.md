@@ -65,8 +65,8 @@ Les frameworks utilisés sont :
 
   Utilisateurs créés au préalable : 
 * Un utilisateur lambda (aucun droit particulier) : 
-  Pseudo : User
-  Mot de passe : user
+  Pseudo = User
+  Mot de passe = user
 * Un utilisateur avec les droits "Membre de l'association" : 
-  Pseudo : Admin
-  Mot de passe : admin
+  Pseudo = Admin
+  Mot de passe = admin

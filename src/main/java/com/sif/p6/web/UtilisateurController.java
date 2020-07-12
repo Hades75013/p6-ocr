@@ -1,7 +1,6 @@
 package com.sif.p6.web;
 
 
-
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -24,6 +23,7 @@ import com.sif.p6.dao.SecteurRepository;
 import com.sif.p6.dao.SpotRepository;
 import com.sif.p6.dao.TopoRepository;
 import com.sif.p6.dao.VoieRepository;
+
 import com.sif.p6.entities.Commentaire;
 import com.sif.p6.entities.Longueur;
 import com.sif.p6.entities.ResaStatutEnum;
@@ -33,7 +33,6 @@ import com.sif.p6.entities.Spot;
 import com.sif.p6.entities.Topo;
 import com.sif.p6.entities.Utilisateur;
 import com.sif.p6.entities.Voie;
-
 
 
 @Controller
@@ -61,6 +60,7 @@ public class UtilisateurController {
 	private ReservationRepository reservationRepository;
 
 
+	/*Méthodes communes à l'utilisateur connecté (role User) et l'administrateur (role Admin)*/
 	
 	@RequestMapping(value="user/espaceperso")
 	public String EspacePerso (Model model){
@@ -131,15 +131,6 @@ public class UtilisateurController {
 	
 		return "espacepersoreservations";
 	}
-	
-
-	@RequestMapping(value="/user/deconnection")
-	public String Deconnection (){
-
-		 SecurityContextHolder.clearContext();	 
-
-		 return "redirect:/connection"; 
-	}
 
 	
 	@RequestMapping(value="/user/listespots")
@@ -178,16 +169,6 @@ public class UtilisateurController {
 
 		return "resultatrecherchedepartement";
 	}
-
-
-	@RequestMapping(value="/user/ajouterspot", method=RequestMethod.GET)
-	public String ajouterSpot(Model model) {
-
-		model.addAttribute("spot",new Spot());
-
-		return "formspot";
-
-	}
 	
 	
 	@RequestMapping(value="/user/rechercheParTopoDispo")
@@ -206,7 +187,17 @@ public class UtilisateurController {
 		return "resultatrecherchetopo";
 	}
 
+	
+	@RequestMapping(value="/user/ajouterspot", method=RequestMethod.GET)
+	public String ajouterSpot(Model model) {
 
+		model.addAttribute("spot",new Spot());
+
+		return "formspot";
+
+	}
+	
+	
 	@RequestMapping(value="user/saveajoutspot", method=RequestMethod.POST)
 	public String sauverAjoutSpot(Model model, @Valid Spot spot, BindingResult bindingResult) {
 
@@ -564,5 +555,13 @@ public class UtilisateurController {
 		return "confirmationrefusresa";
 	}
 	
+	
+	@RequestMapping(value="/user/deconnection")
+	public String Deconnection (){
+
+		 SecurityContextHolder.clearContext();	 
+
+		 return "redirect:/connection"; 
+	}
 
 }
