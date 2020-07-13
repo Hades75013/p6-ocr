@@ -41,7 +41,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 	</div>
 	
 	
-<div class=container>
+<div sec:authorize="isAuthenticated()" class=container>
 
 <div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	

@@ -26,7 +26,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 					<th>Nom</th>
 					<th sec:authorize="hasAuthority('ADMIN')">Modifier</th>
 					<th sec:authorize="hasAuthority('ADMIN')">Supprimer</th>
-					<th sec:authorize="isAuthenticated()">Voies</th>
+					<th >Voies</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,14 +34,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 					<td th:text="${secteur.nom}"></td>
 					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/modifiersecteur(idSecteur=${secteur.id})}"><span class="glyphicon glyphicon-cog"></span></a></td>				
 					<td sec:authorize="hasAuthority('ADMIN')"><a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" th:href="@{/admin/supprimersecteur(idSecteur=${secteur.id}, idSpot=${secteur.spot.id})}"><span class="glyphicon glyphicon-trash"></span></a></td>								
-					<td><a th:href="@{/user/ajoutervoie(idSecteur=${secteur.id})}"><span class="glyphicon glyphicon-road"></span></a></td>
+					<td><a th:href="@{ajoutervoie(idSecteur=${secteur.id})}"><span class="glyphicon glyphicon-road"></span></a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
 
-<div class="container">
+<div sec:authorize="isAuthenticated()" class="container">
 
 <div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	

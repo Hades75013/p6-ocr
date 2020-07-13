@@ -20,13 +20,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sif.p6.dao.CommentaireRepository;
+import com.sif.p6.dao.LongueurRepository;
+import com.sif.p6.dao.SecteurRepository;
 import com.sif.p6.dao.SpotRepository;
 import com.sif.p6.dao.TopoRepository;
 import com.sif.p6.dao.UtilisateurRepository;
+import com.sif.p6.dao.VoieRepository;
 import com.sif.p6.entities.Spot;
 import com.sif.p6.entities.Topo;
 import com.sif.p6.entities.Utilisateur;
+import com.sif.p6.entities.Voie;
+import com.sif.p6.entities.Commentaire;
+import com.sif.p6.entities.Longueur;
 import com.sif.p6.entities.RoleEnum;
+import com.sif.p6.entities.Secteur;
 
 
 /*Méthodes accessibles pour le simple visiteur sans authentification*/
@@ -42,6 +50,20 @@ public class VisiteurController {
 
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+
+	@Autowired
+	private SecteurRepository secteurRepository;
+	
+	@Autowired
+	private VoieRepository voieRepository;
+
+	@Autowired
+	private LongueurRepository longueurRepository;
+
+	@Autowired
+	private CommentaireRepository commentaireRepository;
+
+
 
 
 	@RequestMapping(value="home")
@@ -106,6 +128,59 @@ public class VisiteurController {
 	}
 
 
+	@RequestMapping(value="ajoutersecteur", method=RequestMethod.GET)
+	public String ajouterSecteur(Model model, Long idSpot) { 
+
+		model.addAttribute("secteur",new Secteur());
+		model.addAttribute("listeSecteurs", secteurRepository.findSecteurBySpot(idSpot));
+		model.addAttribute("idSpot", idSpot);
+
+		return "formsecteur";
+	}
+	
+	
+	@RequestMapping(value="ajoutervoie", method=RequestMethod.GET)
+	public String ajouterVoie(Model model, Long idSecteur) { 
+
+		model.addAttribute("voie", new Voie());
+		model.addAttribute("listeVoies", voieRepository.findVoieBySecteur(idSecteur));
+		model.addAttribute("idSecteur", idSecteur);
+		
+		return "formvoie";
+	}
+	
+	@RequestMapping(value="ajouterlongueur", method=RequestMethod.GET)
+	public String ajouterLongueur(Model model, Long idVoie) { 
+
+		model.addAttribute("longueur", new Longueur());
+		model.addAttribute("listeLongueurs", longueurRepository.findLongueurByVoie(idVoie));
+		model.addAttribute("idVoie", idVoie);
+
+		return "formlongueur";
+	}
+
+	
+	@RequestMapping(value="ajoutercommentaire", method=RequestMethod.GET)
+	public String ajouterCommentaire(Model model, Long idSpot) { 
+
+		model.addAttribute("commentaire", new Commentaire());
+		model.addAttribute("listeCommentaires", commentaireRepository.findCommentaireBySpot(idSpot));
+		model.addAttribute("idSpot", idSpot);
+
+		return "formcommentaire";
+	}
+	
+	@RequestMapping(value="ajoutertopo", method=RequestMethod.GET)
+	public String ajouterTopo(Model model, Long idSpot) { 
+
+		model.addAttribute("topo", new Topo());
+		model.addAttribute("listeTopos", topoRepository.findTopoBySpot(idSpot));
+		model.addAttribute("idSpot", idSpot);
+
+		return "formtopo";
+	}
+	
+	
 	@RequestMapping(value="inscription")
 	public String ajouterUtilisateur(Model model) {
 

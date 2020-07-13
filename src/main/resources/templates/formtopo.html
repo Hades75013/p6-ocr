@@ -2,7 +2,8 @@
 <html 
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+layout:decorate="~{layout}"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
@@ -36,14 +37,14 @@ layout:decorate="~{layout}">
 		    			<p th:case="false" class="red">Indisponible</p>
 					</td>
 					<td th:text="${topo.utilisateur.pseudo}"></td>
-					<td th:if="${topo.statut}"><a th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get" class="btn btn-primary"><strong>Demander topo</strong></a></td>
+					<td sec:authorize="isAuthenticated()" th:if="${topo.statut}"><a th:href= "@{/user/demandertopo(idTopo=${topo.id})}" method="get" class="btn btn-primary"><strong>Demander topo</strong></a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
 
-<div class="container">
+<div sec:authorize="isAuthenticated()" class="container">
 	
 <div class="spacer col-lg-4 col-md-4 col-xs-6">
 	<div class="panel panel-default">	
